@@ -8,17 +8,34 @@ let dealerHand,
     playerHand,
     playerName,
     playerPhoto,
-    wager,
+    wagerAmount,
     insurance,
     startingBalance,
+    playerBalance,
     winAmount;
 
 
+let state = {
+    dealerHand: dealerHand,
+    playerHand: playerHand,
+    wager: wagerAmount,
+    playerHand: playerBalance,
+}
+
+
 /*----- cached elements  -----*/
+// Opening View 
+const mainScreen = document.querySelector('.main')
+const dealerOne = document.querySelector('.dealer-one')
+const ruleList = document.querySelector('#rules-list')
+const backButton = document.querySelector('back-button')
+
+
+
 // Player Choices
 
 const startButton = document.querySelector('.start')
-const rulesButton = document.querySelector('.rules')
+const rulesButton = document.querySelector('.rules-button')
 const wagerButton = document.querySelector('.wager')
 const dealButton = document.querySelector('.deal')
 const hitButton = document.querySelector('.hit')
@@ -43,6 +60,29 @@ const imagePayOut = document.querySelector('.payout')
 
 /*----- event listeners -----*/
 
+function showRules(evt) {
+    console.log('did this click work?')
+    mainScreen.removeChild(dealerOne)
+    mainScreen.removeChild(rulesButton)
+    mainScreen.removeChild(startButton)
+    mainScreen.appendChild(ruleList)
+
+
+}
+
+function handleBack() {
+    init()
+}
 
 
 /*----- functions -----*/
+rulesButton.addEventListener("click", showRules)
+
+
+
+function init() {
+
+    mainScreen.removeChild(ruleList)
+}
+
+init()
