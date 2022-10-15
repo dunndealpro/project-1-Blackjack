@@ -1,7 +1,7 @@
 # Black Jack
 
 ## Object of the Game
-- each player is trying to beat the dealer by getting a count as close to 21 wihtout going over 21
+- each player is trying to beat the dealer by getting a count as close to 21 without going over 21
 
 ## Card Values 
 - Aces are worth either 1 or 11, player choses its value
@@ -15,9 +15,9 @@
     - players cards are dealt face up while the dealers second card is dealt faced down
 
 - **blackjack** occurs when a player's first two cards are an ace and card worth 10, giving 21.  
-    -if the dealers face up card is a 10 card or an ace, dealer checks face down card for a **blackhack**
-    -if the dealer does not have **blackhack** the player automatically wins and player wins one and half times their betted amount
-    -if the dealer also has **blackhack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
+    -if the dealers face up card is a 10 card or an ace, dealer checks face down card for a **blackjack**
+    -if the dealer does not have **blackjack** the player automatically wins and player wins one and half times their betted amount
+    -if the dealer also has **blackjack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
     -if not a black jack, dealer's face down card is left face down until it is the dealer's turn
     -dealer plays last
 
@@ -28,16 +28,16 @@
 - if player has an ace and any other non-10 card, player can count ace as 1 or 11 and may decided to continue to 'hit' or 'stand'
     - if  player has a "soft 17" (an ace and a 6), the total is 7 or 17. While a count of 17 is a good hand, the player may wish to draw for a higher total. If the draw creates a bust hand by counting the ace as an 11, the player counts the ace as a 1 and continues playing by 'standing' or 'hitting' 
 
-- after player has finshed their turn, dealers face card is turned up
+- after player has finished their turn, dealers face card is turned up
     - if the total is 17 or more, dealer stands
     - if total is 16 or less, dealer must hit
     - if the dealer has an ace, and counting it as 11 would bring the total to 17 or more (but not over 21), the dealer must count the ace as 11 and stand.
 
-- if player's first two are the same amount, they may **split** and split their cards into two seperate hands
+- if player's first two are the same amount, they may **split** and split their cards into two separate hands
     - if choose to split, original wager must be placed on first card and equal amount is place on second card
-    - the two hands are treated as two seperate hands. 
+    - the two hands are treated as two separate hands. 
         - with a pair of aces player is only given one card for each ace and must stand
-            - if second card is a 10-card, payoff is 1:1(unlike 1:1.5 as with black jack at anyother time)
+            - if second card is a 10-card, payoff is 1:1(unlike 1:1.5 as with black jack at another time)
 
 - if a players original two cards total 9, 10, or 11, the may **double down**
     - player doubles their wager, and receives only one addition card and play resumes
@@ -54,7 +54,7 @@
 ## Wireframe
 
 ![Black Jack Wireframe two screen](img/first-page.jpg)
-![Black Jack Wirefram of player info view](img/player-info.jpg)
+![Black Jack Wireframe of player info view](img/player-info.jpg)
 ![Black Jack Wireframe of the main game view](img/main-game-screen.jpg)
 
 ### PseudoCode
@@ -100,7 +100,7 @@ function splitHand(){
 
 function calcPlayerHand(){
     // check if player has an Ace
-    // player has ace dertermine to use 1 or 11 for its value
+    // player has ace determine to use 1 or 11 for its value
     // sum the players cards
 }
 

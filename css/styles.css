@@ -1,3 +1,68 @@
 body {
-    background-color: red;
+    display: flex;
+    background-color: rgb(177, 154, 24);
+    font-family: 'Luckiest Guy', cursive;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(240, 98, 62);
+    text-align: center;
+    font-size: 40px;
+    width: 60vw;
+    border-radius: 25px;
+    margin: 30px auto
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    width: 60vw;
+    background-color: rgb(86, 133, 139);
+    align-items: center;
+}
+
+.dealer-one {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    width: 80%;
+    margin: 20px;
+    background-color: blueviolet;
+    border: solid 2px black;
+    justify-content: center;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    justify-content: center;
+    font-size: 30px;
+    text-align: center;
+    border: 3px solid rgb(177, 154, 24);
+    background-color: lightgrey;
+    padding: 3px;
+    margin: 3px;
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    justify-content: center;
+    width: 40vw;
+    font-size: 30px;
+    text-align: center;
+    border: 3px solid rgb(177, 154, 24);
+    background-color: lightgrey;
+    padding: 3px;
+    margin: 3px;
 }
