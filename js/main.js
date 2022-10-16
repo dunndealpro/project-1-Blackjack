@@ -14,7 +14,6 @@ let dealerHand,
     playerBalance,
     winAmount;
 
-
 let state = {
     dealerHand: dealerHand,
     playerHand: playerHand,
@@ -30,10 +29,7 @@ const dealerOne = document.querySelector('.dealer-one')
 const ruleList = document.querySelector('.rules-list')
 const backButton = document.querySelector('.back-button', '.rules-list')
 const choosePlayer = document.querySelector('.start-page')
-
-
-
-
+const balanceAmount = document.querySelector('.balance-amount')
 
 // Player Choices
 
@@ -47,6 +43,10 @@ const continueButton = document.querySelector('.continue')
 const yesButton = document.querySelector('.yes')
 const noButton = document.querySelector('.no')
 const restartButton = document.querySelector('.restart')
+const playerSelected = document.querySelectorAll('.player')
+
+
+
 
 // Display Game Info
 const dealersCards = document.querySelector('.dealers-cards')
@@ -57,9 +57,7 @@ const playerHandInfo = document.querySelector('.player-hand-info')
 const imageCardDeck = document.querySelector('.card-deck')
 const imagePayOut = document.querySelector('.payout')
 
-
 // Reset Game
-
 
 /*----- event listeners -----*/
 
@@ -68,8 +66,6 @@ function showRules(evt) {
     mainScreen.removeChild(rulesButton)
     mainScreen.removeChild(startButton)
     mainScreen.appendChild(ruleList)
-
-
 }
 
 function handleBack() {
@@ -86,12 +82,19 @@ function start() {
     mainScreen.appendChild(choosePlayer)
 }
 
+function getPlayerBalance(event) {
+    mainScreen.removeChild(choosePlayer)
+    mainScreen.appendChild(balanceAmount)
+}
 
 /*----- functions -----*/
 rulesButton.addEventListener("click", showRules)
 backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
 
+playerSelected.forEach(function(player) {
+    player.addEventListener('click', getPlayerBalance)
+})
 
 
 
@@ -100,6 +103,7 @@ function init() {
 
     mainScreen.removeChild(ruleList)
     mainScreen.removeChild(choosePlayer)
+    mainScreen.removeChild(balanceAmount)
 }
 
 init()

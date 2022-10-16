@@ -147,6 +147,19 @@ li {
     object-fit: cover;
 }
 
+.balance-amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+    flex
+}
+
+.balance-amount div {
+    margin: 20px;
+}
+
 @charset "UTF-8";
 .card {
     box-sizing: border-box;
