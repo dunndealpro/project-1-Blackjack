@@ -24,12 +24,14 @@ let state = {
 
 /*----- cached elements  -----*/
 // Game Views
+const backGround = document.querySelector('body')
 const mainScreen = document.querySelector('.main')
 const dealerOne = document.querySelector('.dealer-one')
 const ruleList = document.querySelector('.rules-list')
 const backButton = document.querySelector('.back-button', '.rules-list')
 const choosePlayer = document.querySelector('.start-page')
 const balanceAmount = document.querySelector('.balance-amount')
+const gameTable = document.querySelector('.game-table')
 
 // Player Choices
 
@@ -44,6 +46,7 @@ const yesButton = document.querySelector('.yes')
 const noButton = document.querySelector('.no')
 const restartButton = document.querySelector('.restart')
 const playerSelected = document.querySelectorAll('.player')
+const letsPlayButton = document.querySelector('.lets-play')
 
 
 
@@ -61,7 +64,7 @@ const imagePayOut = document.querySelector('.payout')
 
 /*----- event listeners -----*/
 
-function showRules(evt) {
+function showRules() {
     mainScreen.removeChild(dealerOne)
     mainScreen.removeChild(rulesButton)
     mainScreen.removeChild(startButton)
@@ -82,21 +85,44 @@ function start() {
     mainScreen.appendChild(choosePlayer)
 }
 
-function getPlayerBalance(event) {
+function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
+    playerName = evt.composedPath()
+    playerName = playerName[1].id
+    playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
+    console.log(playerName)
+}
+
+function gameStart(evt) {
+
+    startingBalance = document.querySelector('input')
+    startingBalance = startingBalance.value
+    goToTheTable()
+
+}
+
+
+function goToTheTable() {
+
+    mainScreen.removeChild(balanceAmount)
+    mainScreen.appendChild(gameTable)
+    mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
+    backGround.style.backgroundColor = 'rgb(191, 48, 163)'
+
+
+
 }
 
 /*----- functions -----*/
 rulesButton.addEventListener("click", showRules)
 backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
+letsPlayButton.addEventListener("click", gameStart)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
-
-
 
 
 function init() {
@@ -104,6 +130,7 @@ function init() {
     mainScreen.removeChild(ruleList)
     mainScreen.removeChild(choosePlayer)
     mainScreen.removeChild(balanceAmount)
+    mainScreen.removeChild(gameTable)
 }
 
 init()
