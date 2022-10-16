@@ -36,7 +36,7 @@ h1 {
     height: 300px;
     width: 400px;
     margin: 20px;
-    background-color: blueviolet;
+    background-color: rgb(191, 48, 163);
     border: solid 2px black;
     justify-content: center;
 }
@@ -75,7 +75,7 @@ div img {
     margin: 3px;
 }
 
-#rules-list {
+.rules-list {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -110,6 +110,41 @@ li {
     font-size: 16px;
     background-color: rgb(240, 98, 62);
     border: 2px solid rgb(177, 154, 24);
+}
+
+.start-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* align-content: center; */
+}
+
+#choose {
+    margin: 15px;
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    width: 200px;
+    height: 150px;
+    background-color: lightgrey;
+    /* /* justify-content: center; */
+    text-align: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.player img {
+    width: 100%;
+    height: 100%;
+    max-width: 90px;
+    max-height: 90px;
+    object-fit: cover;
 }
 
 @charset "UTF-8";

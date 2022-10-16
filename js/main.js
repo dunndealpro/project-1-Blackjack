@@ -24,11 +24,14 @@ let state = {
 
 
 /*----- cached elements  -----*/
-// Opening View 
+// Game Views
 const mainScreen = document.querySelector('.main')
 const dealerOne = document.querySelector('.dealer-one')
-const ruleList = document.querySelector('#rules-list')
-const backButton = document.querySelector('back-button')
+const ruleList = document.querySelector('.rules-list')
+const backButton = document.querySelector('.back-button', '.rules-list')
+const choosePlayer = document.querySelector('.start-page')
+
+
 
 
 
@@ -61,7 +64,6 @@ const imagePayOut = document.querySelector('.payout')
 /*----- event listeners -----*/
 
 function showRules(evt) {
-    console.log('did this click work?')
     mainScreen.removeChild(dealerOne)
     mainScreen.removeChild(rulesButton)
     mainScreen.removeChild(startButton)
@@ -71,18 +73,33 @@ function showRules(evt) {
 }
 
 function handleBack() {
-    init()
+    mainScreen.appendChild(dealerOne)
+    mainScreen.appendChild(rulesButton)
+    mainScreen.appendChild(startButton)
+    mainScreen.removeChild(ruleList)
+}
+
+function start() {
+    mainScreen.removeChild(dealerOne)
+    mainScreen.removeChild(rulesButton)
+    mainScreen.removeChild(startButton)
+    mainScreen.appendChild(choosePlayer)
 }
 
 
 /*----- functions -----*/
 rulesButton.addEventListener("click", showRules)
+backButton.addEventListener("click", handleBack)
+startButton.addEventListener("click", start)
+
+
 
 
 
 function init() {
 
     mainScreen.removeChild(ruleList)
+    mainScreen.removeChild(choosePlayer)
 }
 
 init()
