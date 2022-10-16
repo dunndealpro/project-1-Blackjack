@@ -39,21 +39,21 @@
         </div>
         <div class="start-page">
             <div id="choose">Choose Your Player</div>
-            <div class="player" id="lucy">
-                <p>Lucy</p>
-                <img src="img/lucy.png" alt="picture of Lucy">
+            <div class="player" id="player-one">
+                <p></p>
+                <!-- <img src="img/lucy.png" alt="picture of Lucy"> -->
             </div>
-            <div class="player" id="sparky">
-                <p>Sparky</p>
-                <img src="img/sparky.png" alt="picture of Sparky">
+            <div class="player" id="player-two">
+                <p></p>
+                <!-- <img src="img/sparky.png" alt="picture of Sparky"> -->
             </div>
-            <div class="player" id="burton">
-                <p>Burton</p>
-                <img src="img/burton.png" alt="picture of Burton">
+            <div class="player" id="player-three">
+                <p></p>
+                <!-- <img src="img/burton.png" alt="picture of Burton"> -->
             </div>
-            <div class="player" id="milo">
-                <p>Milo</p>
-                <img src="img/milo.png" alt="picture of Milo">
+            <div class="player" id="player-four">
+                <p></p>
+                <!-- <img src="img/milo.png" alt="picture of Milo"> -->
             </div>
         </div>
         <div class="balance-amount">
@@ -62,12 +62,23 @@
             <div class="lets-play">Let's Play!</div>
         </div>
         <div class="game-table">
-            <div id="dealer-play" class="small-container"><img src="img/yog-dealer.png" alt="pictre of yogibear"></div>
-            <div id="dealers-cards" class="large-container"></div>
+            <div id="dealer-play" class="small-container"><img src="img/yog-dealer.png" alt="pictre of yogibear">Dealer</div>
+            <div id="dealers-cards" class="large-container">Dealer's Cards</div>
             <div id="card-deck" class="small-container"></div>
             <div id="player-info" class="small-container"></div>
-            <div id="players=cards" class="large-container"> </div>
-            <div id="payout" class="small-container"> </div>
+            <div id="players-cards" class="large-container">Player's Cards
+                <div class="player-enter-wager"> Enter Wager</div>
+                <input type="number">
+                <div class="deal-button">Deal</div>
+                <div class="gameplay-player-cards"></div>
+                <div class="gameplay-container">
+                    <div id="current-balance" class="gameplay-info"></div>
+                    <div id="player-card-total" class="gameplay-info"></div>
+                    <div id="wager-amount" class="gameplay-info"></div>
+                </div>
+
+            </div>
+            <div id="payout" class="small-container"></div>
             <div id="restart" class="smaller-container">
                 <p>Restart</p>
             </div>

@@ -1,13 +1,24 @@
 console.log("Connected to html file!")
 
 /*----- constants -----*/
-
+const playerOneName = 'Sparky'
+const playerOneImage = new Image(200, 150)
+playerOneImage.src = 'img/sparky.png'
+const playerThreeName = 'Burton'
+const playerThreeImage = new Image(200, 150)
+playerThreeImage.src = 'img/burton.png'
+const playerTwoName = 'Milo'
+const playerTwoImage = new Image(200, 150)
+playerTwoImage.src = 'img/milo.png'
+const playerFourName = 'Lucy'
+const playerFourImage = new Image(200, 150)
+playerFourImage.src = 'img/lucy.png'
 
 /*----- state variables -----*/
 let dealerHand,
     playerHand,
     playerName,
-    playerPhoto,
+    playerPhoto = new Image(175, 175),
     wagerAmount,
     insurance,
     startingBalance,
@@ -32,6 +43,10 @@ const backButton = document.querySelector('.back-button', '.rules-list')
 const choosePlayer = document.querySelector('.start-page')
 const balanceAmount = document.querySelector('.balance-amount')
 const gameTable = document.querySelector('.game-table')
+const playerOne = document.querySelector('#player-one')
+const playerTwo = document.querySelector('#player-two')
+const playerThree = document.querySelector('#player-three')
+const playerFour = document.querySelector('#player-four')
 
 // Player Choices
 
@@ -55,14 +70,16 @@ const letsPlayButton = document.querySelector('.lets-play')
 const dealersCards = document.querySelector('.dealers-cards')
 const playersCards = document.querySelector('.players-cards')
 const imageDealer = document.querySelector('.image-dealer')
-const imagePlayer = document.querySelector('.image-player')
+const playerInfo = document.querySelector('#player-info')
 const playerHandInfo = document.querySelector('.player-hand-info')
 const imageCardDeck = document.querySelector('.card-deck')
 const imagePayOut = document.querySelector('.payout')
 
 // Reset Game
 
-/*----- event listeners -----*/
+
+
+/*----- functions -----*/
 
 function showRules() {
     mainScreen.removeChild(dealerOne)
@@ -83,14 +100,27 @@ function start() {
     mainScreen.removeChild(rulesButton)
     mainScreen.removeChild(startButton)
     mainScreen.appendChild(choosePlayer)
+    addPlayerInfo()
+}
+
+function addPlayerInfo() {
+    playerOne.innerText = playerOneName
+    playerOne.appendChild(playerOneImage)
+    playerTwo.innerText = playerTwoName
+    playerTwo.appendChild(playerTwoImage)
+    playerThree.innerText = playerThreeName
+    playerThree.appendChild(playerThreeImage)
+    playerFour.innerText = playerFourName
+    playerFour.appendChild(playerFourImage)
 }
 
 function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
-    playerName = playerName[1].id
-    playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
+    console.log(playerName)
+        // playerName = playerName[1].innerText
+        // playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
     console.log(playerName)
 }
 
@@ -102,19 +132,27 @@ function gameStart(evt) {
 
 }
 
-
 function goToTheTable() {
-
     mainScreen.removeChild(balanceAmount)
     mainScreen.appendChild(gameTable)
     mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
-
+    playerPhoto.src = playerName[0].currentSrc
+    playerInfo.appendChild(playerPhoto)
 
 
 }
 
-/*----- functions -----*/
+function init() {
+    mainScreen.removeChild(ruleList)
+    mainScreen.removeChild(choosePlayer)
+    mainScreen.removeChild(balanceAmount)
+    mainScreen.removeChild(gameTable)
+}
+
+
+/*----- event listeners -----*/
+
 rulesButton.addEventListener("click", showRules)
 backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
@@ -124,13 +162,5 @@ playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
 
-
-function init() {
-
-    mainScreen.removeChild(ruleList)
-    mainScreen.removeChild(choosePlayer)
-    mainScreen.removeChild(balanceAmount)
-    mainScreen.removeChild(gameTable)
-}
 
 init()

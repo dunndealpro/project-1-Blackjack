@@ -2,5 +2,6 @@
     "cSpell.enabled": true,
     "cSpell.words": [
         "Facecards"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
