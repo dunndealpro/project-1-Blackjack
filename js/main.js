@@ -168,14 +168,29 @@ function goToTheTable() {
     generateCards()
 }
 
+// function generateCards() {
+
+//     for (let i = 0; i < values.length; i++) {
+//         for (let j = 0; j < suits.length; j++) {
+//             let card = values[i] + suits[j]
+//             newDeck.push(card)
+//         }
+//     }
+// }
+
 function generateCards() {
-    for (let i = 0; i < values.length; i++) {
-        for (let j = 0; j < suits.length; j++) {
-            let card = values[i] + suits[j]
-            newDeck.push(card)
+    let numberOfDecks = 4
+    for (let k = 0; k < numberOfDecks; k++) {
+        for (let i = 0; i < values.length; i++) {
+            for (let j = 0; j < suits.length; j++) {
+                let card = values[i] + suits[j]
+                newDeck.push(card)
+            }
         }
     }
 }
+
+
 
 function dealRandomCard() {
     let card = Math.floor(Math.random() * newDeck.length)
@@ -402,13 +417,15 @@ function stand() {
         dealerHand.push(dealRandomCard())
         console.log(dealerHand)
         determineDealerHandValue(dealerHand)
+        console.log(dealerHand)
     }
-    // dealerHand.forEach(function(hand) {
-    //     setTimeout(() => {
-    //         let dealerNextCard = document.createElement('div')
-    //         dealerNextCard.textContent = dealerHand[hand]
-    //     }, 1500);
-    // })
+    dealerHand.forEach(function(hand) {
+        setTimeout(() => {
+            let dealerNextCard = document.createElement('div')
+            dealerNextCard.textContent = dealerHand[hand]
+            dealersCards.appendChild(dealerNextCard)
+        }, 1500);
+    })
 }
 
 
