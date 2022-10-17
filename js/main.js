@@ -168,9 +168,10 @@ function dealCards() {
     playersCards.removeChild(enterWager)
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
-
-
+    generateCards()
 }
+
+
 
 /*----- event listeners -----*/
 
