@@ -24,7 +24,9 @@ let dealerHand,
     startingBalance,
     currentBalanceAmt,
     playerBalance,
-    winAmount;
+    winAmount,
+    deckLength,
+    currentCard;
 
 // let state = {
 //     dealerHand: dealerHand,
@@ -85,6 +87,43 @@ const inputWager = document.getElementById('input-wager')
 
 // Reset Game
 
+/*----- Deck Generator -----*/
+let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+let suits = ['spades', 'clubs', 'diamonds', 'hearts']
+let newDeck = []
+
+console.log(values[12])
+
+function generateCards() {
+    for (let i = 0; i < values.length; i++) {
+        for (let j = 0; j < suits.length; j++) {
+            let card = values[i] + suits[j]
+
+            newDeck.push(card)
+        }
+    }
+}
+
+function dealRandomCard() {
+    // console.log(newDeck[1])
+    let card = Math.floor(Math.random() * newDeck.length)
+    deckLength = deckLength - 1
+    console.log(newDeck[card])
+    newDeck.splice(card, 1)
+        // console.log(newDeck)
+    return newDeck[card]
+
+}
+
+function dealFirstTwoCards() {
+    playerHand = dealRandomCard()
+
+    // dealerHand = dealRandomCard()
+    // playerHand += dealRandomCard()
+    // dealerHand += dealRandomCard()
+    console.log(playerHand)
+        // console.log(dealerHand)
+}
 
 
 /*----- functions -----*/
@@ -150,6 +189,7 @@ function goToTheTable() {
     playerInfo.appendChild(playerPhoto)
     currentBalanceAmt = startingBalance
     currentBalance.innerText = currentBalanceAmt
+    generateCards()
 }
 
 
@@ -168,7 +208,8 @@ function dealCards() {
     playersCards.removeChild(enterWager)
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
-    generateCards()
+    dealFirstTwoCards()
+
 }
 
 
