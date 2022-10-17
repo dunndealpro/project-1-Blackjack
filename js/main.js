@@ -22,15 +22,16 @@ let dealerHand,
     wagerAmount,
     insurance,
     startingBalance,
+    currentBalanceAmt,
     playerBalance,
     winAmount;
 
-let state = {
-    dealerHand: dealerHand,
-    playerHand: playerHand,
-    wager: wagerAmount,
-    playerHand: playerBalance,
-}
+// let state = {
+//     dealerHand: dealerHand,
+//     playerHand: playerHand,
+//     wager: wagerAmount,
+//     playerHand: playerBalance,
+// }
 
 
 /*----- cached elements  -----*/
@@ -53,7 +54,7 @@ const playerFour = document.querySelector('#player-four')
 const startButton = document.querySelector('.start')
 const rulesButton = document.querySelector('.rules-button')
 const wagerButton = document.querySelector('.wager')
-const dealButton = document.querySelector('.deal')
+const dealButton = document.querySelector('.deal-button')
 const hitButton = document.querySelector('.hit')
 const standButton = document.querySelector('.stand')
 const continueButton = document.querySelector('.continue')
@@ -68,12 +69,19 @@ const letsPlayButton = document.querySelector('.lets-play')
 
 // Display Game Info
 const dealersCards = document.querySelector('.dealers-cards')
-const playersCards = document.querySelector('.players-cards')
+const playersCards = document.querySelector('#players-cards')
 const imageDealer = document.querySelector('.image-dealer')
 const playerInfo = document.querySelector('#player-info')
 const playerHandInfo = document.querySelector('.player-hand-info')
 const imageCardDeck = document.querySelector('.card-deck')
 const imagePayOut = document.querySelector('.payout')
+const currentBalance = document.getElementById('bal-amt')
+const currentWager = document.getElementById('wager-amt')
+const currentHandCount = document.getElementById('hand-count')
+const enterWager = document.querySelector('.player-enter-wager')
+const inputWager = document.getElementById('input-wager')
+
+
 
 // Reset Game
 
@@ -128,6 +136,7 @@ function gameStart(evt) {
 
     startingBalance = document.querySelector('input')
     startingBalance = startingBalance.value
+    console.log(startingBalance)
     goToTheTable()
 
 }
@@ -139,9 +148,10 @@ function goToTheTable() {
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
     playerPhoto.src = playerName[0].currentSrc
     playerInfo.appendChild(playerPhoto)
-
-
+    currentBalanceAmt = startingBalance
+    currentBalance.innerText = currentBalanceAmt
 }
+
 
 function init() {
     mainScreen.removeChild(ruleList)
@@ -150,6 +160,17 @@ function init() {
     mainScreen.removeChild(gameTable)
 }
 
+function dealCards() {
+
+    wagerAmount = document.querySelector('input')
+    wagerAmount = wagerAmount.value
+    currentWager.innerText = wagerAmount
+    playersCards.removeChild(enterWager)
+    playersCards.removeChild(inputWager)
+    playersCards.removeChild(dealButton)
+
+
+}
 
 /*----- event listeners -----*/
 
@@ -157,6 +178,7 @@ rulesButton.addEventListener("click", showRules)
 backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
 letsPlayButton.addEventListener("click", gameStart)
+dealButton.addEventListener("click", dealCards)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)

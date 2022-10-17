@@ -68,17 +68,22 @@
             <div id="player-info" class="small-container"></div>
             <div id="players-cards" class="large-container">Player's Cards
                 <div class="player-enter-wager"> Enter Wager</div>
-                <input type="number">
+                <input id="input-wager" type="number">
                 <div class="deal-button">Deal</div>
                 <div class="gameplay-player-cards"></div>
                 <div class="gameplay-container">
-                    <div id="current-balance" class="gameplay-info"></div>
-                    <div id="player-card-total" class="gameplay-info"></div>
-                    <div id="wager-amount" class="gameplay-info"></div>
+                    <!-- <div id="current-balance" class="gameplay-info"><span>Balance:</span></div>
+                    <div id="wager-amount" class="gameplay-info">Wager: </div>
+                    <div id="player-card-total" class="gameplay-info">Hand:</div> -->
                 </div>
 
             </div>
-            <div id="payout" class="small-container"></div>
+            <div id="payout" class="small-container">
+                <div id="current-balance" class="gameplay-info"><span>Balance:</span> <br>$<span id="bal-amt">0</span> </div>
+                <div id="wager-amount" class="gameplay-info"><span>Wager: </span><br>$<span id="wager-amt">0</span></div>
+                <div id="player-card-total" class="gameplay-info"><span>Hand:</span><br><span id="hand-count">N/A </span></div>
+                <div id="insurance" class="gameplay-info"><span>Insurance:</span><br><span id="insurance">N/A</span></div>
+            </div>
             <div id="restart" class="smaller-container">
                 <p>Restart</p>
             </div>
