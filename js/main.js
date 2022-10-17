@@ -15,8 +15,8 @@ const playerFourImage = new Image(200, 150)
 playerFourImage.src = 'img/lucy.png'
 
 /*----- state variables -----*/
-let dealerHand,
-    playerHand,
+let dealerHand = [],
+    playerHand = [],
     playerName,
     playerPhoto = new Image(175, 175),
     wagerAmount,
@@ -82,6 +82,7 @@ const currentWager = document.getElementById('wager-amt')
 const currentHandCount = document.getElementById('hand-count')
 const enterWager = document.querySelector('.player-enter-wager')
 const inputWager = document.getElementById('input-wager')
+    // const playerCardTotal = document.getElementById('#player-card-total')
 
 
 
@@ -98,31 +99,75 @@ function generateCards() {
     for (let i = 0; i < values.length; i++) {
         for (let j = 0; j < suits.length; j++) {
             let card = values[i] + suits[j]
-
             newDeck.push(card)
         }
     }
 }
 
 function dealRandomCard() {
-    // console.log(newDeck[1])
     let card = Math.floor(Math.random() * newDeck.length)
-    deckLength = deckLength - 1
-    console.log(newDeck[card])
+    console.log(newDeck[card]) // to see the card being dealt
+    let newCard = newDeck[card]
     newDeck.splice(card, 1)
-        // console.log(newDeck)
-    return newDeck[card]
-
+    console.log(newDeck) // to check that the card has been removed
+    return newCard
 }
 
 function dealFirstTwoCards() {
-    playerHand = dealRandomCard()
-
-    // dealerHand = dealRandomCard()
-    // playerHand += dealRandomCard()
-    // dealerHand += dealRandomCard()
-    console.log(playerHand)
+    playerHand.push(dealRandomCard())
+    dealerHand.push(dealRandomCard())
+    playerHand.push(dealRandomCard())
+    dealerHand.push(dealRandomCard())
+        // playerHand = dealRandomCard()
+        // console.log(playerHand)
+        // dealerHand = dealRandomCard()
         // console.log(dealerHand)
+        // playerHand += dealRandomCard()
+        // dealerHand += dealRandomCard()
+    console.log('Player Hand = ' + playerHand) // does not match the card logged in the dealRandomCard function
+    console.log('Dealer Hand = ' + dealerHand) // does not match the card logged in the dealRandomCard function
+        // console.log(newDeck) // does not match the newDeck logged in the last dealRandomCard function
+    determineHandValue(playerHand)
+}
+
+function determineHandValue(hand) {
+
+    tempVal = 0
+    hand.forEach(function(value) {
+
+        let cardVal = value.charAt(0)
+        if (cardVal === 'A') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 11
+            tempVal += cardVal
+        } else if (cardVal === 'J' || cardVal === 'Q' || cardVal === 'K') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 10
+            tempVal += cardVal
+        } else if (cardVal === '1') {
+            cardVal = 10
+            tempVal += cardVal
+        } else {
+            cardVal = parseInt(cardVal)
+            tempVal += cardVal
+        }
+    })
+    let numberOfAces = hand.filter(function(ace) {
+        let a = ace.startsWith('A')
+        return a
+    })
+    let amountToDeduct = 10
+    if (numberOfAces.length >= 2) {
+        amountToDeduct = (numberOfAces.length - 1) * 10
+    }
+    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
+        tempVal -= amountToDeduct
+    }
+    console.log(numberOfAces)
+    console.log(numberOfAces.length)
+    console.log('Player hand value = ' + tempVal)
+    console.log('remaining cards in deck: ' + newDeck.length)
+
 }
 
 
@@ -191,6 +236,10 @@ function goToTheTable() {
     currentBalance.innerText = currentBalanceAmt
     generateCards()
 }
+
+// function upDatePlayerHandValue(){
+// currentHandCount.innerText = 
+// }
 
 
 function init() {
