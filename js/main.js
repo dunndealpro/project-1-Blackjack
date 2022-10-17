@@ -17,9 +17,12 @@ playerFourImage.src = 'img/lucy.png'
 /*----- state variables -----*/
 let dealerHand = [],
     playerHand = [],
+    playerHandValue,
+    dealerHandValue,
     playerName,
     playerPhoto = new Image(175, 175),
     wagerAmount,
+    payOutAmount,
     insurance,
     startingBalance,
     currentBalanceAmt,
@@ -57,8 +60,9 @@ const startButton = document.querySelector('.start')
 const rulesButton = document.querySelector('.rules-button')
 const wagerButton = document.querySelector('.wager')
 const dealButton = document.querySelector('.deal-button')
-const hitButton = document.querySelector('.hit')
-const standButton = document.querySelector('.stand')
+const hitButton = document.querySelector('#hit-me')
+console.log(hitButton)
+const standButton = document.querySelector('#stand')
 const continueButton = document.querySelector('.continue')
 const yesButton = document.querySelector('.yes')
 const noButton = document.querySelector('.no')
@@ -70,8 +74,9 @@ const letsPlayButton = document.querySelector('.lets-play')
 
 
 // Display Game Info
-const dealersCards = document.querySelector('.dealers-cards')
+const dealersCards = document.querySelector('#dealers-cards')
 const playersCards = document.querySelector('#players-cards')
+console.log(playersCards)
 const imageDealer = document.querySelector('.image-dealer')
 const playerInfo = document.querySelector('#player-info')
 const playerHandInfo = document.querySelector('.player-hand-info')
@@ -95,80 +100,6 @@ let newDeck = []
 
 console.log(values[12])
 
-function generateCards() {
-    for (let i = 0; i < values.length; i++) {
-        for (let j = 0; j < suits.length; j++) {
-            let card = values[i] + suits[j]
-            newDeck.push(card)
-        }
-    }
-}
-
-function dealRandomCard() {
-    let card = Math.floor(Math.random() * newDeck.length)
-    console.log(newDeck[card]) // to see the card being dealt
-    let newCard = newDeck[card]
-    newDeck.splice(card, 1)
-    console.log(newDeck) // to check that the card has been removed
-    return newCard
-}
-
-function dealFirstTwoCards() {
-    playerHand.push(dealRandomCard())
-    dealerHand.push(dealRandomCard())
-    playerHand.push(dealRandomCard())
-    dealerHand.push(dealRandomCard())
-        // playerHand = dealRandomCard()
-        // console.log(playerHand)
-        // dealerHand = dealRandomCard()
-        // console.log(dealerHand)
-        // playerHand += dealRandomCard()
-        // dealerHand += dealRandomCard()
-    console.log('Player Hand = ' + playerHand) // does not match the card logged in the dealRandomCard function
-    console.log('Dealer Hand = ' + dealerHand) // does not match the card logged in the dealRandomCard function
-        // console.log(newDeck) // does not match the newDeck logged in the last dealRandomCard function
-    determineHandValue(playerHand)
-}
-
-function determineHandValue(hand) {
-
-    tempVal = 0
-    hand.forEach(function(value) {
-
-        let cardVal = value.charAt(0)
-        if (cardVal === 'A') {
-            // cardVal = cardVal.parseInt()
-            cardVal = 11
-            tempVal += cardVal
-        } else if (cardVal === 'J' || cardVal === 'Q' || cardVal === 'K') {
-            // cardVal = cardVal.parseInt()
-            cardVal = 10
-            tempVal += cardVal
-        } else if (cardVal === '1') {
-            cardVal = 10
-            tempVal += cardVal
-        } else {
-            cardVal = parseInt(cardVal)
-            tempVal += cardVal
-        }
-    })
-    let numberOfAces = hand.filter(function(ace) {
-        let a = ace.startsWith('A')
-        return a
-    })
-    let amountToDeduct = 10
-    if (numberOfAces.length >= 2) {
-        amountToDeduct = (numberOfAces.length - 1) * 10
-    }
-    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
-        tempVal -= amountToDeduct
-    }
-    console.log(numberOfAces)
-    console.log(numberOfAces.length)
-    console.log('Player hand value = ' + tempVal)
-    console.log('remaining cards in deck: ' + newDeck.length)
-
-}
 
 
 /*----- functions -----*/
@@ -237,9 +168,172 @@ function goToTheTable() {
     generateCards()
 }
 
-// function upDatePlayerHandValue(){
-// currentHandCount.innerText = 
-// }
+function generateCards() {
+    for (let i = 0; i < values.length; i++) {
+        for (let j = 0; j < suits.length; j++) {
+            let card = values[i] + suits[j]
+            newDeck.push(card)
+        }
+    }
+}
+
+function dealRandomCard() {
+    let card = Math.floor(Math.random() * newDeck.length)
+    console.log(newDeck[card]) // to see the card being dealt
+    let newCard = newDeck[card]
+    newDeck.splice(card, 1)
+    console.log(newDeck) // to check that the card has been removed
+    return newCard
+}
+
+function dealFirstTwoCards() {
+    playerHand.push(dealRandomCard())
+    dealerHand.push(dealRandomCard())
+    playerHand.push(dealRandomCard())
+    dealerHand.push(dealRandomCard())
+    currentBalanceAmt = startingBalance - wagerAmount
+    currentBalance.innerText = currentBalanceAmt
+        // playerHand = dealRandomCard()
+        // console.log(playerHand)
+        // dealerHand = dealRandomCard()
+        // console.log(dealerHand)
+        // playerHand += dealRandomCard()
+        // dealerHand += dealRandomCard()
+    console.log('Player Hand = ' + playerHand) // does not match the card logged in the dealRandomCard function
+    console.log('Dealer Hand = ' + dealerHand) // does not match the card logged in the dealRandomCard function
+        // console.log(newDeck) // does not match the newDeck logged in the last dealRandomCard function
+    determinePlayerHandValue(playerHand)
+    determineDealerHandValue(dealerHand)
+    upDatePlayerHandValue()
+    updatePlayerCards()
+    updateDealerCards()
+    checkForBlackJack()
+}
+
+function checkForBlackJack() {
+    if (playerHandValue === 21 && dealerHandValue !== 21) {
+        console.log('player wins!')
+        payOutAmount = 1.5 * wagerAmount
+        console.log(payOutAmount)
+        return blackJack = true
+
+    } else if (playerHandValue === 21 && dealerHandValue === 21) {
+        console.log("Hand is a push")
+        payOutAmount = wagerAmount
+        return gamePush = true
+    } else if (playerHandValue !== 21 && dealerHandValue === 21) {
+        console.log('Dealer has BlackJack')
+    } else {
+        console.log('no black jack')
+        return blackJack = false, gamePush = false
+    }
+}
+
+function updateDealerCards() {
+    let dealerShowCard = document.createElement('div')
+    dealerShowCard.textContent = dealerHand[0]
+    dealersCards.appendChild(dealerShowCard)
+    let dealerDownCard = document.createElement('div')
+    dealerDownCard.setAttribute("id", "dealer-down")
+    dealerDownCard.textContent = '*****'
+    dealersCards.appendChild(dealerDownCard)
+}
+
+function updatePlayerCards() {
+    playerHand.forEach(function(card) {
+        let gameCard = document.createElement('div')
+        gameCard.textContent = card
+        playersCards.appendChild(gameCard)
+        console.log(card)
+    })
+}
+
+function determinePlayerHandValue(hand) {
+
+    tempVal = 0
+    hand.forEach(function(value) {
+
+        let cardVal = value.charAt(0)
+        if (cardVal === 'A') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 11
+            tempVal += cardVal
+        } else if (cardVal === 'J' || cardVal === 'Q' || cardVal === 'K') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 10
+            tempVal += cardVal
+        } else if (cardVal === '1') {
+            cardVal = 10
+            tempVal += cardVal
+        } else {
+            cardVal = parseInt(cardVal)
+            tempVal += cardVal
+        }
+    })
+    let numberOfAces = hand.filter(function(ace) {
+        let a = ace.startsWith('A')
+        return a
+    })
+    let amountToDeduct = 10
+    if (numberOfAces.length >= 2) {
+        amountToDeduct = (numberOfAces.length - 1) * 10
+    }
+    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
+        tempVal -= amountToDeduct
+    }
+    playerHandValue = tempVal
+    console.log(numberOfAces)
+    console.log(numberOfAces.length)
+    console.log('Player hand value = ' + tempVal)
+    console.log('remaining cards in deck: ' + newDeck.length)
+        // return playerHandValue = tempVal
+}
+
+function determineDealerHandValue(hand) {
+
+    tempVal = 0
+    hand.forEach(function(value) {
+
+        let cardVal = value.charAt(0)
+        if (cardVal === 'A') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 11
+            tempVal += cardVal
+        } else if (cardVal === 'J' || cardVal === 'Q' || cardVal === 'K') {
+            // cardVal = cardVal.parseInt()
+            cardVal = 10
+            tempVal += cardVal
+        } else if (cardVal === '1') {
+            cardVal = 10
+            tempVal += cardVal
+        } else {
+            cardVal = parseInt(cardVal)
+            tempVal += cardVal
+        }
+    })
+    let numberOfAces = hand.filter(function(ace) {
+        let a = ace.startsWith('A')
+        return a
+    })
+    let amountToDeduct = 10
+    if (numberOfAces.length >= 2) {
+        amountToDeduct = (numberOfAces.length - 1) * 10
+    }
+    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
+        tempVal -= amountToDeduct
+    }
+    dealerHandValue = tempVal
+    console.log(numberOfAces)
+    console.log(numberOfAces.length)
+    console.log('dealer hand value = ' + tempVal)
+    console.log('remaining cards in deck: ' + newDeck.length)
+        // return dealerHandValue = tempVal
+}
+
+function upDatePlayerHandValue() {
+    console.log(playerHandValue)
+    currentHandCount.innerText = playerHandValue
+}
 
 
 function init() {
@@ -261,6 +355,64 @@ function dealCards() {
 
 }
 
+function hitMe() {
+    if (blackJack !== true && gamePush !== true) {
+        playerHand.push(dealRandomCard())
+        console.log('Player Hand = ' + playerHand)
+        determinePlayerHandValue(playerHand)
+        upDatePlayerHandValue()
+    }
+    if (playerHandValue > 21) {
+        console.log('Player Busted!')
+    }
+}
+
+// function stand() {
+//     dealerDownCard.textContent = dealerHand[1]
+//     while (dealerHandValue < 16) {
+//         setTimeout(() => {
+//             dealerDownCard.textContent = dealerHand[1]
+//             dealerHand.push(dealRandomCard())
+//         })
+//     }, 1500);
+
+// }
+
+// function stand() {
+//     dealerDownCard = document.getElementById('dealer-down')
+//     dealerDownCard.textContent = dealerHand[1]
+//     let tempDealerValue = dealerHandValue
+//     while (tempDealerValue < 16) {
+//         setTimeout(() => {
+//             dealerHand.push(dealRandomCard())
+//             let dealerNextCard = createElement('div')
+//             dealerNextCard.textContent = dealerHand[]
+//         }, 1500);
+
+//     }
+// }
+
+
+function stand() {
+    dealerDownCard = document.getElementById('dealer-down')
+    dealerDownCard.textContent = dealerHand[1]
+
+    // console.log(tempDealerValue)
+    while (dealerHandValue <= 16) {
+        dealerHand.push(dealRandomCard())
+        console.log(dealerHand)
+        determineDealerHandValue(dealerHand)
+    }
+    // dealerHand.forEach(function(hand) {
+    //     setTimeout(() => {
+    //         let dealerNextCard = document.createElement('div')
+    //         dealerNextCard.textContent = dealerHand[hand]
+    //     }, 1500);
+    // })
+}
+
+
+
 
 
 /*----- event listeners -----*/
@@ -270,6 +422,8 @@ backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
 letsPlayButton.addEventListener("click", gameStart)
 dealButton.addEventListener("click", dealCards)
+hitButton.addEventListener('click', hitMe)
+standButton.addEventListener('click', stand)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)

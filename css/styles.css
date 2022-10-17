@@ -275,6 +275,13 @@ input {
     justify-content: center;
 }
 
+#card-deck-inplay {
+    margin: 5px;
+    height: 100%;
+    background-color: lightgrey;
+    border: 2px solid black;
+}
+
 .player-enter-wager {
     margin-top: 20px;
 }
