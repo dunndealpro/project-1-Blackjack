@@ -29,7 +29,11 @@ let dealerHand = [],
     playerBalance,
     winAmount,
     deckLength,
-    currentCard;
+    currentCard,
+    playerBust,
+    dealerBust,
+    blackJack,
+    gamePush;
 
 // let state = {
 //     dealerHand: dealerHand,
@@ -61,7 +65,6 @@ const rulesButton = document.querySelector('.rules-button')
 const wagerButton = document.querySelector('.wager')
 const dealButton = document.querySelector('.deal-button')
 const hitButton = document.querySelector('#hit-me')
-console.log(hitButton)
 const standButton = document.querySelector('#stand')
 const continueButton = document.querySelector('.continue')
 const yesButton = document.querySelector('.yes')
@@ -147,7 +150,7 @@ function getPlayerBalance(evt) {
     console.log(playerName)
 }
 
-function gameStart(evt) {
+function gameStart() {
 
     startingBalance = document.querySelector('input')
     startingBalance = startingBalance.value
@@ -168,16 +171,6 @@ function goToTheTable() {
     generateCards()
 }
 
-// function generateCards() {
-
-//     for (let i = 0; i < values.length; i++) {
-//         for (let j = 0; j < suits.length; j++) {
-//             let card = values[i] + suits[j]
-//             newDeck.push(card)
-//         }
-//     }
-// }
-
 function generateCards() {
     let numberOfDecks = 4
     for (let k = 0; k < numberOfDecks; k++) {
@@ -189,8 +182,6 @@ function generateCards() {
         }
     }
 }
-
-
 
 function dealRandomCard() {
     let card = Math.floor(Math.random() * newDeck.length)
@@ -228,13 +219,15 @@ function dealFirstTwoCards() {
 function checkForBlackJack() {
     if (playerHandValue === 21 && dealerHandValue !== 21) {
         console.log('player wins!')
-        payOutAmount = 1.5 * wagerAmount
+        payOutAmount = 2.5 * wagerAmount
         console.log(payOutAmount)
+        currentBalance = currentBalance + payOutAmount
         return blackJack = true
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         console.log("Hand is a push")
         payOutAmount = wagerAmount
+        currentBalance = currentBalance + payOutAmount
         return gamePush = true
     } else if (playerHandValue !== 21 && dealerHandValue === 21) {
         console.log('Dealer has BlackJack')
@@ -246,10 +239,12 @@ function checkForBlackJack() {
 
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
+    dealerShowCard.setAttribute("class", "dealer-card")
     dealerShowCard.textContent = dealerHand[0]
     dealersCards.appendChild(dealerShowCard)
     let dealerDownCard = document.createElement('div')
-    dealerDownCard.setAttribute("id", "dealer-down")
+    dealerDownCard.setAttribute("id", "down-card")
+    dealerDownCard.setAttribute("class", "dealer-card")
     dealerDownCard.textContent = '*****'
     dealersCards.appendChild(dealerDownCard)
 }
@@ -257,6 +252,7 @@ function updateDealerCards() {
 function updatePlayerCards() {
     playerHand.forEach(function(card) {
         let gameCard = document.createElement('div')
+        gameCard.setAttribute("id", "player-shown")
         gameCard.textContent = card
         playersCards.appendChild(gameCard)
         console.log(card)
@@ -350,16 +346,7 @@ function upDatePlayerHandValue() {
     currentHandCount.innerText = playerHandValue
 }
 
-
-function init() {
-    mainScreen.removeChild(ruleList)
-    mainScreen.removeChild(choosePlayer)
-    mainScreen.removeChild(balanceAmount)
-    mainScreen.removeChild(gameTable)
-}
-
 function dealCards() {
-
     wagerAmount = document.querySelector('input')
     wagerAmount = wagerAmount.value
     currentWager.innerText = wagerAmount
@@ -367,7 +354,6 @@ function dealCards() {
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
     dealFirstTwoCards()
-
 }
 
 function hitMe() {
@@ -379,6 +365,8 @@ function hitMe() {
     }
     if (playerHandValue > 21) {
         console.log('Player Busted!')
+        playerBust = true
+
     }
 }
 
@@ -407,9 +395,8 @@ function hitMe() {
 //     }
 // }
 
-
 function stand() {
-    dealerDownCard = document.getElementById('dealer-down')
+    dealerDownCard = document.getElementById('down-card')
     dealerDownCard.textContent = dealerHand[1]
 
     // console.log(tempDealerValue)
@@ -419,15 +406,63 @@ function stand() {
         determineDealerHandValue(dealerHand)
         console.log(dealerHand)
     }
-    dealerHand.forEach(function(hand) {
+    for (let i = dealerHand[2]; i < dealerHand.length; i++) {
         setTimeout(() => {
             let dealerNextCard = document.createElement('div')
             dealerNextCard.textContent = dealerHand[hand]
+            console.log(dealerNextCard)
             dealersCards.appendChild(dealerNextCard)
+
         }, 1500);
-    })
+    }
+
+    if (dealerHandValue > 21) {
+        console.log('dealer bust')
+        dealerBust = true
+        nextHand()
+    }
+
+    compareHands()
+
 }
 
+function compareHands() {
+    if (playerBust === true && dealerBust === true) {
+        if (playerHandValue > dealerHandValue) {
+            console.log('Player Wins!')
+            payOutAmount = wagerAmount * 2
+            currentBalanceAmt = currentBalance + payOutAmount
+        } else if (playerHandValue < dealerHandValue) {
+            console.log('Dealer Wins')
+
+        } else {
+            console.log('Hand is a push')
+            payOutAmount = wagerAmount
+            currentBalanceAmt = currentBalance + payOutAmount
+        }
+    }
+
+    currentBalance.innerText = currentBalanceAmt
+    nextHand()
+}
+
+function nextHand() {
+    dealerShownCards = document.querySelectorAll('.dealer-card')
+    playerShownCards = document.querySelectorAll('#player-shown')
+    console.log(playerShownCards)
+    playerShownCards.forEach(function(card) {
+        playersCards.removeChild(card)
+    })
+    dealerShownCards.forEach(function(card) {
+        dealersCards.removeChild(card)
+    })
+    playersCards.appendChild(enterWager)
+    playersCards.appendChild(inputWager)
+    playersCards.appendChild(dealButton)
+    inputWager.value = null
+    playerHand = []
+    dealerHandValue = []
+}
 
 
 
@@ -446,5 +481,11 @@ playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
 
+function init() {
+    mainScreen.removeChild(ruleList)
+    mainScreen.removeChild(choosePlayer)
+    mainScreen.removeChild(balanceAmount)
+    mainScreen.removeChild(gameTable)
+}
 
 init()
