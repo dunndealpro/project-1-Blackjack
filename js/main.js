@@ -144,10 +144,10 @@ function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
-    console.log(playerName)
+        // console.log(playerName)
         // playerName = playerName[1].innerText
         // playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
-    console.log(playerName)
+        // console.log(playerName)
 }
 
 function gameStart() {
@@ -172,7 +172,7 @@ function goToTheTable() {
 }
 
 function generateCards() {
-    let numberOfDecks = 4
+    let numberOfDecks = 2
     for (let k = 0; k < numberOfDecks; k++) {
         for (let i = 0; i < values.length; i++) {
             for (let j = 0; j < suits.length; j++) {
@@ -185,14 +185,12 @@ function generateCards() {
 
 function dealRandomCard() {
     let card = Math.floor(Math.random() * newDeck.length)
-    console.log(newDeck[card]) // to see the card being dealt
+        // console.log(newDeck[card]) // to see the card being dealt
     let newCard = newDeck[card]
     newDeck.splice(card, 1)
-    console.log(newDeck) // to check that the card has been removed
+        // console.log(newDeck) // to check that the card has been removed
     return newCard
 }
-
-
 
 function dealCards() {
     wagerAmount = document.querySelector('input')
@@ -228,34 +226,18 @@ function dealFirstTwoCards() {
     checkForBlackJack()
 }
 
-
-function hitMe() {
-    if (blackJack !== true && gamePush !== true) {
-        playerHand.push(dealRandomCard())
-        console.log('Player Hand = ' + playerHand)
-        determinePlayerHandValue(playerHand)
-        upDatePlayerHandValue()
-    }
-    if (playerHandValue > 21) {
-        console.log('Player Busted!')
-        playerBust = true
-        console.log(playerBust)
-        stand()
-    }
-}
-
 function checkForBlackJack() {
     if (playerHandValue === 21 && dealerHandValue !== 21) {
         console.log('player wins!')
         payOutAmount = 2.5 * wagerAmount
         console.log(payOutAmount)
-        currentBalance = currentBalance + payOutAmount
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
         return blackJack = true
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         console.log("Hand is a push")
         payOutAmount = wagerAmount
-        currentBalance = currentBalance + payOutAmount
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
         return gamePush = true
     } else if (playerHandValue !== 21 && dealerHandValue === 21) {
         console.log('Dealer has BlackJack')
@@ -283,7 +265,7 @@ function updatePlayerCards() {
         gameCard.setAttribute("id", "player-shown")
         gameCard.textContent = card
         playersCards.appendChild(gameCard)
-        console.log(card)
+            // console.log(card)
     })
 }
 
@@ -321,10 +303,10 @@ function determinePlayerHandValue(hand) {
         tempVal -= amountToDeduct
     }
     playerHandValue = tempVal
-    console.log(numberOfAces)
-    console.log(numberOfAces.length)
+        // console.log(numberOfAces)
+        // console.log(numberOfAces.length)
     console.log('Player hand value = ' + tempVal)
-    console.log('remaining cards in deck: ' + newDeck.length)
+        // console.log('remaining cards in deck: ' + newDeck.length)
         // return playerHandValue = tempVal
 }
 
@@ -362,16 +344,32 @@ function determineDealerHandValue(hand) {
         tempVal -= amountToDeduct
     }
     dealerHandValue = tempVal
-    console.log(numberOfAces)
-    console.log(numberOfAces.length)
-    console.log('dealer hand value = ' + tempVal)
-    console.log('remaining cards in deck: ' + newDeck.length)
+        // console.log(numberOfAces)
+        // console.log(numberOfAces.length)
+        // console.log('dealer hand value = ' + tempVal)
+        // console.log('remaining cards in deck: ' + newDeck.length)
         // return dealerHandValue = tempVal
+    console.log('Dealer hand Value = ' + dealerHandValue)
 }
 
 function upDatePlayerHandValue() {
-    console.log(playerHandValue)
+    // console.log(playerHandValue)
     currentHandCount.innerText = playerHandValue
+}
+
+function hitMe() {
+    if (blackJack !== true && gamePush !== true) {
+        playerHand.push(dealRandomCard())
+        console.log('Player Hand = ' + playerHand)
+        determinePlayerHandValue(playerHand)
+        upDatePlayerHandValue()
+    }
+    if (playerHandValue > 21) {
+        console.log('Player Busted!')
+        playerBust = true
+        console.log(playerBust)
+        stand()
+    }
 }
 
 // function stand() {
@@ -407,7 +405,7 @@ function stand() {
     // console.log(tempDealerValue)
     while (dealerHandValue <= 16) {
         dealerHand.push(dealRandomCard())
-        console.log(dealerHand)
+            // console.log(dealerHand)
         determineDealerHandValue(dealerHand)
         console.log(dealerHand)
     }
@@ -426,7 +424,7 @@ function stand() {
         dealerBust = true
             // nextHand()
     }
-
+    console.log('prepare to compare')
     compareHands()
 
 }
@@ -438,7 +436,27 @@ function compareHands() {
     } else if (playerBust === true && dealerBust === true) {
         console.log('Dealer Wins')
         nextHand()
+    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
+        console.log('player wins!')
+        payOutAmount = wagerAmount * 2
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
+        nextHand()
+    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
+        console.log('dealer wins!')
+        nextHand()
+    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
+        console.log('game is a push')
+        payOutAmount = wagerAmount * 1
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
+        nextHand()
+    } else if ((playerBust !== true && dealerBust === true) && (playerHandValue < 21)) {
+        console.log('player wins!')
+        payOutAmount = wagerAmount * 2
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
+        nextHand()
     }
+    currentBalance.innerText = currentBalanceAmt
+
 }
 
 // function compareHands() {
@@ -469,7 +487,7 @@ function compareHands() {
 function nextHand() {
     dealerShownCards = document.querySelectorAll('.dealer-card')
     playerShownCards = document.querySelectorAll('#player-shown')
-    console.log(playerShownCards)
+        // console.log(playerShownCards)
     playerShownCards.forEach(function(card) {
         playersCards.removeChild(card)
     })
@@ -483,7 +501,7 @@ function nextHand() {
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
     playerHand = []
-    dealerHandValue = []
+    dealerHand = []
     playerBust = null
     dealerBust = null
     blackJack = null
