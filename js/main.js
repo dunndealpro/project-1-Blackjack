@@ -172,7 +172,7 @@ function goToTheTable() {
 }
 
 function generateCards() {
-    let numberOfDecks = 2
+    let numberOfDecks = 4
     for (let k = 0; k < numberOfDecks; k++) {
         for (let i = 0; i < values.length; i++) {
             for (let j = 0; j < suits.length; j++) {
@@ -363,6 +363,10 @@ function hitMe() {
         console.log('Player Hand = ' + playerHand)
         determinePlayerHandValue(playerHand)
         upDatePlayerHandValue()
+        let gameCard = document.createElement('div')
+        gameCard.setAttribute("id", "player-shown")
+        gameCard.textContent = playerHand[playerHand.length - 1]
+        playersCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
         console.log('Player Busted!')
@@ -426,7 +430,6 @@ function stand() {
     }
     console.log('prepare to compare')
     compareHands()
-
 }
 
 function compareHands() {
@@ -456,33 +459,7 @@ function compareHands() {
         nextHand()
     }
     currentBalance.innerText = currentBalanceAmt
-
 }
-
-// function compareHands() {
-//     console.log('compare invoked')
-//     if (playerBust !== true && dealerBust !== true) {
-//         console.log('compare begin')
-//         if ((playerBust !== true) && (playerHandValue > dealerHandValue)) {
-//             console.log('Player Wins!')
-//             payOutAmount = wagerAmount * 2
-//             currentBalanceAmt = currentBalance + payOutAmount
-//         } else if (playerBust === true || (playerHandValue < dealerHandValue)) {
-//             console.log('Dealer Wins')
-
-//         } else if (playerBust === true && (dealerHandValue <= 21)) {
-//             console.log('dealer Wins')
-//         } else if (playerHandValue === dealerHandValue) {
-//             console.log('Hand is a push')
-//             payOutAmount = wagerAmount
-//             currentBalanceAmt = currentBalance + payOutAmount
-//         }
-//     }
-//     console.log(currentBalanceAmt)
-//     currentBalance.innerText = currentBalanceAmt
-//     wagerAmount.innerText = 0
-//     nextHand()
-// }
 
 function nextHand() {
     dealerShownCards = document.querySelectorAll('.dealer-card')
@@ -507,8 +484,6 @@ function nextHand() {
     blackJack = null
     gamePush = null
 }
-
-
 
 
 /*----- event listeners -----*/
