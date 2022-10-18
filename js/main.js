@@ -78,6 +78,7 @@ const noButton = document.querySelector('.no')
 const nextHandButton = document.querySelector('#restart')
 const playerSelected = document.querySelectorAll('.player')
 const letsPlayButton = document.querySelector('.lets-play')
+const exitButton = document.getElementById('exit-quit')
 
 
 
@@ -236,8 +237,8 @@ function dealFirstTwoCards() {
 function checkForBlackJack() {
     if (playerHandValue === 21 && dealerHandValue !== 21) {
         console.log('player wins!')
-        payOutAmount = 2.5 * wagerAmount
-        console.log(payOutAmount)
+            // payOutAmount = 2.5 * wagerAmount
+            // console.log(payOutAmount)
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         dealerDownCard = document.getElementById('down-card')
         dealerDownCard.textContent = dealerHand[1]
@@ -246,7 +247,7 @@ function checkForBlackJack() {
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         console.log("Hand is a push")
-        payOutAmount = wagerAmount
+            // payOutAmount = wagerAmount
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
         compareHands()
@@ -432,6 +433,69 @@ function stand() {
 
 function compareHands() {
     console.log('compare starts')
+        // if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
+        //     console.log('Dealer Wins')
+        //     dealerWin = true
+        //     playerResultText = "Player Busts"
+        //     dealerResultText = "Dealer Wins!"
+        //     displayHandResults()
+        //         // nextHand()
+        // } else if (playerBust === true && dealerBust === true) {
+        //     console.log('Dealer Wins')
+        //     dealerWin = true
+        //     playerResultText = "Player Busts"
+        //     dealerResultText = "Dealer Busts, but still wins!"
+        //     displayHandResults()
+        //         // nextHand()
+        // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
+        //     console.log('player wins!')
+        //     payOutAmount = wagerAmount * 2
+        //     currentBalanceAmt = currentBalanceAmt + payOutAmount
+        //     playerWin = true
+        //     playerResultText = "Player Wins!"
+        //     dealerResultText = "Dealer Loses"
+        //     displayHandResults()
+        //         // nextHand()
+        // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
+
+    //     console.log('dealer wins!')
+    //     dealerWin = true
+    //     playerResultText = "Player Loses"
+    //     dealerResultText = "Dealer Wins!"
+    //     displayHandResults()
+    //         // nextHand()
+    // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
+    //     console.log('game is a push')
+    //     payOutAmount = wagerAmount * 1
+    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
+    //     gamePush = true
+    //     playerResultText = "Push!"
+    //     dealerResultText = "Push!"
+    //     displayHandResults()
+    //         // nextHand()
+    // } else if ((playerBust !== true && dealerBust === true) && (playerHandValue <= 21)) {
+    //     console.log('player wins!')
+    //     payOutAmount = wagerAmount * 2
+    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
+    //     playerWin = true
+    //     playerResultText = "Player Wins!"
+    //     dealerResultText = "Dealer Busts"
+    //     displayHandResults()
+    //         // nextHand()
+    // } else if (dBlackJack) {
+    //     dealerWin = true
+    //     playerResultText = "Player Loses"
+    //     dealerResultText = "Dealer has Blackjack"
+    //     displayHandResults()
+    // } else if (pBlackJack) {
+    //     playerWin = true
+    //     payOutAmount = wagerAmount * 2.5
+    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
+    //     playerResultText = "BLACKJACK!!"
+    //     dealerResultText = "Dealer Loses"
+    //     displayHandResults()
+    // }
+
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
         dealerWin = true
@@ -439,14 +503,16 @@ function compareHands() {
         dealerResultText = "Dealer Wins!"
         displayHandResults()
             // nextHand()
-    } else if (playerBust === true && dealerBust === true) {
+    }
+    if (playerBust === true && dealerBust === true) {
         console.log('Dealer Wins')
         dealerWin = true
         playerResultText = "Player Busts"
         dealerResultText = "Dealer Busts, but still wins!"
         displayHandResults()
             // nextHand()
-    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
+    }
+    if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
         console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
@@ -455,7 +521,8 @@ function compareHands() {
         dealerResultText = "Dealer Loses"
         displayHandResults()
             // nextHand()
-    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
+    }
+    if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
 
         console.log('dealer wins!')
         dealerWin = true
@@ -463,7 +530,8 @@ function compareHands() {
         dealerResultText = "Dealer Wins!"
         displayHandResults()
             // nextHand()
-    } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
+    }
+    if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
         console.log('game is a push')
         payOutAmount = wagerAmount * 1
         currentBalanceAmt = currentBalanceAmt + payOutAmount
@@ -472,7 +540,8 @@ function compareHands() {
         dealerResultText = "Push!"
         displayHandResults()
             // nextHand()
-    } else if ((playerBust !== true && dealerBust === true) && (playerHandValue < 21)) {
+    }
+    if ((playerBust !== true && dealerBust === true) && (playerHandValue <= 21)) {
         console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
@@ -481,17 +550,22 @@ function compareHands() {
         dealerResultText = "Dealer Busts"
         displayHandResults()
             // nextHand()
-    } else if (pBlackJack) {
+    }
+    if (dBlackJack) {
         dealerWin = true
         playerResultText = "Player Loses"
         dealerResultText = "Dealer has Blackjack"
         displayHandResults()
-    } else if (dBlackJack) {
+    }
+    if (pBlackJack) {
         playerWin = true
+        payOutAmount = wagerAmount * 2.5
+        currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerResultText = "BLACKJACK!!"
         dealerResultText = "Dealer Loses"
         displayHandResults()
     }
+
     currentBalance.innerText = currentBalanceAmt
 }
 
@@ -499,23 +573,28 @@ function displayHandResults() {
     console.log('display results invoked')
     console.log(playerWin)
     console.log(dealerWin)
-    if (dealerWin) {
+
+    if (dealerWin && dBlackJack) {
+        playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        dealersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
+    } else if (playerWin && pBlackJack) {
+        console.log('player wins')
+        playersCards.style.backgroundColor = 'white'
+        dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
+    } else if (dealerWin) {
         console.log('dealer wins')
+        playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
         dealersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (playerWin) {
         console.log('player wins')
         playersCards.style.backgroundColor = 'white'
-        dCardHeader.innerText = dealerResultText
-        pCardHeader.innerText = playerResultText
-    } else if (playerWin && pBlackJack) {
-        console.log('player wins')
-        playersCards.style.backgroundColor = 'white'
-        dCardHeader.innerText = dealerResultText
-        pCardHeader.innerText = playerResultText
-    } else if (dealerWin && dBlackJack) {
-        dealersCards.style.backgroundColor = 'white'
+        dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (gamePush) {
@@ -525,11 +604,10 @@ function displayHandResults() {
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     }
-    // console.log('will the display change?')
-    // dealersCards.innerText = 'Dealer Wins!'
-    // playersCards.innerText = 'Player Loses'
-    // setTimeout(nextHand(), 3000)
+
 }
+
+// 
 
 function nextHand() {
     dCardHeader.innerText = 'Dealer Cards'
@@ -563,7 +641,6 @@ function nextHand() {
     dealerWin = null
 }
 
-
 /*----- event listeners -----*/
 
 rulesButton.addEventListener("click", showRules)
@@ -574,10 +651,20 @@ dealButton.addEventListener("click", dealCards)
 hitButton.addEventListener('click', hitMe)
 standButton.addEventListener('click', stand)
 nextHandButton.addEventListener('click', nextHand)
+exitButton.addEventListener('click', exit)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
+
+function exit() {
+    mainScreen.removeChild(gameTable)
+    mainScreen.appendChild(dealerOne)
+    mainScreen.appendChild(rulesButton)
+    mainScreen.appendChild(startButton)
+    mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
+    backGround.style.backgroundColor = 'rgb(177, 154, 24)'
+}
 
 function init() {
     mainScreen.removeChild(ruleList)
