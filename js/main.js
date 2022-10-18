@@ -232,6 +232,8 @@ function checkForBlackJack() {
         payOutAmount = 2.5 * wagerAmount
         console.log(payOutAmount)
         currentBalanceAmt = currentBalanceAmt + payOutAmount
+        dealerDownCard = document.getElementById('down-card')
+        dealerDownCard.textContent = dealerHand[1]
         return blackJack = true
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
@@ -412,24 +414,26 @@ function stand() {
             // console.log(dealerHand)
         determineDealerHandValue(dealerHand)
         console.log(dealerHand)
-    }
-    for (let i = dealerHand[2]; i < dealerHand.length; i++) {
-        setTimeout(() => {
-            let dealerNextCard = document.createElement('div')
-            dealerNextCard.textContent = dealerHand[hand]
-            console.log(dealerNextCard)
-            dealersCards.appendChild(dealerNextCard)
+            // setTimeout(() => {
+            //     let dealerShowCard = document.createElement('div')
+            //     dealerShowCard.setAttribute("class", "dealer-card")
+            //     dealerShowCard.textContent = dealerHand[dealerHand.length - 1]
+            //     dealersCards.appendChild(dealerShowCard)
+            // }, 1500);
+        console.log('prepare to compare')
+            // setTimeout(compareHands, 2500)
 
-        }, 1500);
     }
+
 
     if (dealerHandValue > 21) {
         console.log('dealer bust')
         dealerBust = true
-            // nextHand()
+        console.log('prepare to compare')
+
+        // setTimeout(compareHands, 2500)
     }
-    console.log('prepare to compare')
-    compareHands()
+    setTimeout(compareHands, 2500)
 }
 
 function compareHands() {
@@ -445,6 +449,7 @@ function compareHands() {
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
+        console.log(dealerBust)
         console.log('dealer wins!')
         nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
@@ -479,8 +484,8 @@ function nextHand() {
     currentWager.innerText = 0
     playerHand = []
     dealerHand = []
-    playerBust = null
-    dealerBust = null
+    playerBust = false
+    dealerBust = false
     blackJack = null
     gamePush = null
 }
