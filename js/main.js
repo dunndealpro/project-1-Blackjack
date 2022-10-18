@@ -32,7 +32,8 @@ let dealerHand = [],
     currentCard,
     playerBust,
     dealerBust,
-    blackJack,
+    dBlackJack,
+    pBlackJack,
     gamePush,
     playerWin,
     dealerWin,
@@ -98,8 +99,6 @@ const inputWager = document.getElementById('input-wager')
 const dCardHeader = document.getElementById('dcard-header')
 const pCardHeader = document.getElementById('pcard-header')
     // const playerCardTotal = document.getElementById('#player-card-total')
-
-
 
 // Reset Game
 
@@ -242,18 +241,23 @@ function checkForBlackJack() {
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         dealerDownCard = document.getElementById('down-card')
         dealerDownCard.textContent = dealerHand[1]
-        return blackJack = true
+        pBlackJack = true
+        compareHands()
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         console.log("Hand is a push")
         payOutAmount = wagerAmount
         currentBalanceAmt = currentBalanceAmt + payOutAmount
-        return gamePush = true
+        gamePush = true
+        compareHands()
     } else if (playerHandValue !== 21 && dealerHandValue === 21) {
         console.log('Dealer has BlackJack')
+        dBlackJack = true
+        compareHands()
     } else {
         console.log('no black jack')
-        return blackJack = false, gamePush = false
+        dBlackJack = false, pBlackJack = false, gamePush = false
+
     }
     // setTimeout(nextHand(), 2000)
 }
@@ -369,7 +373,7 @@ function upDatePlayerHandValue() {
 }
 
 function hitMe() {
-    if (blackJack !== true && gamePush !== true) {
+    if (dBlackJack !== true && gamePush !== true && pBlackJack !== true) {
         playerHand.push(dealRandomCard())
         console.log('Player Hand = ' + playerHand)
         determinePlayerHandValue(playerHand)
@@ -477,6 +481,16 @@ function compareHands() {
         dealerResultText = "Dealer Busts"
         displayHandResults()
             // nextHand()
+    } else if (pBlackJack) {
+        dealerWin = true
+        playerResultText = "Player Loses"
+        dealerResultText = "Dealer has Blackjack"
+        displayHandResults()
+    } else if (dBlackJack) {
+        playerWin = true
+        playerResultText = "BLACKJACK!!"
+        dealerResultText = "Dealer Loses"
+        displayHandResults()
     }
     currentBalance.innerText = currentBalanceAmt
 }
@@ -495,6 +509,15 @@ function displayHandResults() {
         playersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
+    } else if (playerWin && pBlackJack) {
+        console.log('player wins')
+        playersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
+    } else if (dealerWin && dBlackJack) {
+        dealersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
     } else if (gamePush) {
         console.log('push')
         dealersCards.style.backgroundColor = 'white'
@@ -509,8 +532,8 @@ function displayHandResults() {
 }
 
 function nextHand() {
-    dealersCards.innerText = 'Dealer Cards'
-    playersCards.innerText = 'Player Cards'
+    dCardHeader.innerText = 'Dealer Cards'
+    pCardHeader.innerText = 'Player Cards'
     dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
     playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
 
@@ -533,7 +556,8 @@ function nextHand() {
     dealerHand = []
     playerBust = false
     dealerBust = false
-    blackJack = null
+    dPlackJack = null
+    dPlackJack = null
     gamePush = null
     playerWin = null
     dealerWin = null
