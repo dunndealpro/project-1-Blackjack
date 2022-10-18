@@ -79,6 +79,7 @@ const nextHandButton = document.querySelector('#restart')
 const playerSelected = document.querySelectorAll('.player')
 const letsPlayButton = document.querySelector('.lets-play')
 const exitButton = document.getElementById('exit-quit')
+const okButtonOne = document.getElementById('ok-button-1')
 
 
 
@@ -99,6 +100,7 @@ const enterWager = document.querySelector('.player-enter-wager')
 const inputWager = document.getElementById('input-wager')
 const dCardHeader = document.getElementById('dcard-header')
 const pCardHeader = document.getElementById('pcard-header')
+const insufficientFunds = document.getElementById('insufficient-funds')
     // const playerCardTotal = document.getElementById('#player-card-total')
 
 // Reset Game
@@ -169,6 +171,7 @@ function gameStart() {
 function goToTheTable() {
     mainScreen.removeChild(balanceAmount)
     gameTable.removeChild(handResults)
+    gameTable.removeChild(insufficientFunds)
     mainScreen.appendChild(gameTable)
     mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
@@ -207,7 +210,13 @@ function dealCards() {
     playersCards.removeChild(enterWager)
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
-    dealFirstTwoCards()
+    if (wagerAmount <= currentBalanceAmt) {
+        dealFirstTwoCards()
+    } else {
+        playersCards.replaceWith(insufficientFunds)
+            // gameTable.removeChild(playersCards)
+            // gameTable.appendChild(insufficientFunds)
+    }
 }
 
 function dealFirstTwoCards() {
@@ -236,10 +245,10 @@ function dealFirstTwoCards() {
 
 function checkForBlackJack() {
     if (playerHandValue === 21 && dealerHandValue !== 21) {
-        console.log('player wins!')
-            // payOutAmount = 2.5 * wagerAmount
-            // console.log(payOutAmount)
-        currentBalanceAmt = currentBalanceAmt + payOutAmount
+        // console.log('player wins!')
+        // payOutAmount = 2.5 * wagerAmount
+        // console.log(payOutAmount)
+        // currentBalanceAmt = currentBalanceAmt + payOutAmount
         dealerDownCard = document.getElementById('down-card')
         dealerDownCard.textContent = dealerHand[1]
         pBlackJack = true
@@ -433,68 +442,6 @@ function stand() {
 
 function compareHands() {
     console.log('compare starts')
-        // if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
-        //     console.log('Dealer Wins')
-        //     dealerWin = true
-        //     playerResultText = "Player Busts"
-        //     dealerResultText = "Dealer Wins!"
-        //     displayHandResults()
-        //         // nextHand()
-        // } else if (playerBust === true && dealerBust === true) {
-        //     console.log('Dealer Wins')
-        //     dealerWin = true
-        //     playerResultText = "Player Busts"
-        //     dealerResultText = "Dealer Busts, but still wins!"
-        //     displayHandResults()
-        //         // nextHand()
-        // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
-        //     console.log('player wins!')
-        //     payOutAmount = wagerAmount * 2
-        //     currentBalanceAmt = currentBalanceAmt + payOutAmount
-        //     playerWin = true
-        //     playerResultText = "Player Wins!"
-        //     dealerResultText = "Dealer Loses"
-        //     displayHandResults()
-        //         // nextHand()
-        // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
-
-    //     console.log('dealer wins!')
-    //     dealerWin = true
-    //     playerResultText = "Player Loses"
-    //     dealerResultText = "Dealer Wins!"
-    //     displayHandResults()
-    //         // nextHand()
-    // } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
-    //     console.log('game is a push')
-    //     payOutAmount = wagerAmount * 1
-    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
-    //     gamePush = true
-    //     playerResultText = "Push!"
-    //     dealerResultText = "Push!"
-    //     displayHandResults()
-    //         // nextHand()
-    // } else if ((playerBust !== true && dealerBust === true) && (playerHandValue <= 21)) {
-    //     console.log('player wins!')
-    //     payOutAmount = wagerAmount * 2
-    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
-    //     playerWin = true
-    //     playerResultText = "Player Wins!"
-    //     dealerResultText = "Dealer Busts"
-    //     displayHandResults()
-    //         // nextHand()
-    // } else if (dBlackJack) {
-    //     dealerWin = true
-    //     playerResultText = "Player Loses"
-    //     dealerResultText = "Dealer has Blackjack"
-    //     displayHandResults()
-    // } else if (pBlackJack) {
-    //     playerWin = true
-    //     payOutAmount = wagerAmount * 2.5
-    //     currentBalanceAmt = currentBalanceAmt + payOutAmount
-    //     playerResultText = "BLACKJACK!!"
-    //     dealerResultText = "Dealer Loses"
-    //     displayHandResults()
-    // }
 
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
@@ -614,7 +561,8 @@ function nextHand() {
     pCardHeader.innerText = 'Player Cards'
     dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
     playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
-
+        // removeNotification = document.getElementById('notification') //these lines add to remove notification if wagerAmt is larger than current balance
+        // playersCards.removeChild(removeNotification)
     dealerShownCards = document.querySelectorAll('.dealer-card')
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
@@ -639,6 +587,21 @@ function nextHand() {
     gamePush = null
     playerWin = null
     dealerWin = null
+    if (currentBalanceAmt <= 0) {
+        exit()
+    }
+}
+
+function insufficientBack() {
+    //these lines add to remove notification if wagerAmt is larger than current balance
+    // playersCards.removeChild(removeNotification)
+    currentWager.innerText = 0
+    insufficientFunds.replaceWith(playersCards)
+    playersCards.appendChild(enterWager)
+    playersCards.appendChild(inputWager)
+    playersCards.appendChild(dealButton)
+    inputWager.value = null
+
 }
 
 /*----- event listeners -----*/
@@ -652,18 +615,49 @@ hitButton.addEventListener('click', hitMe)
 standButton.addEventListener('click', stand)
 nextHandButton.addEventListener('click', nextHand)
 exitButton.addEventListener('click', exit)
+okButtonOne.addEventListener('click', insufficientBack)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
 
 function exit() {
+    dCardHeader.innerText = 'Dealer Cards'
+    pCardHeader.innerText = 'Player Cards'
+    dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    playersCards.appendChild(enterWager)
+    playersCards.appendChild(inputWager)
+    playersCards.appendChild(dealButton)
+    gameTable.appendChild(handResults)
+    dealerShownCards = document.querySelectorAll('.dealer-card')
+    playerShownCards = document.querySelectorAll('#player-shown')
+        // console.log(playerShownCards)
+    playerShownCards.forEach(function(card) {
+        playersCards.removeChild(card)
+    })
+    dealerShownCards.forEach(function(card) {
+        dealersCards.removeChild(card)
+    })
     mainScreen.removeChild(gameTable)
     mainScreen.appendChild(dealerOne)
     mainScreen.appendChild(rulesButton)
     mainScreen.appendChild(startButton)
     mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
     backGround.style.backgroundColor = 'rgb(177, 154, 24)'
+    currentHandCount.innerText = 'N/A'
+    currentWager.innerText = 0
+    inputWager.value = null
+    startingBalance.value = null
+    playerHand = []
+    dealerHand = []
+    playerBust = false
+    dealerBust = false
+    dPlackJack = null
+    dPlackJack = null
+    gamePush = null
+    playerWin = null
+    dealerWin = null
 }
 
 function init() {
@@ -671,6 +665,7 @@ function init() {
     mainScreen.removeChild(choosePlayer)
     mainScreen.removeChild(balanceAmount)
     mainScreen.removeChild(gameTable)
+
 }
 
 init()

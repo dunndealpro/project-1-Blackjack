@@ -233,13 +233,38 @@ input {
 
 .large-container {
     grid-column: span 2;
+    /* display: grid; */
+    grid-template-columns: 3;
     background-color: rgb(177, 154, 24);
     border: solid 3px black;
     margin: 15px;
     font-size: 25px;
-    /* padding: 10px; */
+    padding: 10px;
     text-align: center;
     justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#ok-button-1 {
+    /* grid-column: span 1; */
+    text-align: center;
+    /* align-content: center; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 5px;
+    width: 100px;
+    height: 30px;
+    margin: 10px 115px 0 115px;
+    /* width: 100px; */
+}
+
+#pcard-header {
+    grid-column: span 1;
+}
+
+#div-notification {
+    grid-column: span 1;
 }
 
 #restart {}
