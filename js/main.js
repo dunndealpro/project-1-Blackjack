@@ -35,7 +35,9 @@ let dealerHand = [],
     blackJack,
     gamePush,
     playerWin,
-    dealerWin;
+    dealerWin,
+    playerResultText,
+    dealerResultText;
 
 // let state = {
 //     dealerHand: dealerHand,
@@ -253,7 +255,7 @@ function checkForBlackJack() {
         console.log('no black jack')
         return blackJack = false, gamePush = false
     }
-    setTimeout(nextHand(), 2000)
+    // setTimeout(nextHand(), 2000)
 }
 
 function updateDealerCards() {
@@ -405,17 +407,12 @@ function stand() {
         let dealerNewCard = document.createElement('div')
         dealerNewCard.setAttribute("class", "dealer-card")
         dealerNewCard.textContent = dealerHand[i]
-        setTimeout(() => {
-            dealersCards.appendChild(dealerNewCard)
-            console.log('card should be shown')
-        }, 2500);
+        dealersCards.appendChild(dealerNewCard)
+            // setTimeout(() => {
+            //     dealersCards.appendChild(dealerNewCard)
+            //     console.log('card should be shown')
+            // }, 1000);
     }
-
-    // console.log('update dealer cards')
-    // let dealerNewCard = document.createElement('div')
-    // dealerNewCard.setAttribute("class", "dealer-card")
-    // dealerNewCard.textContent = dealerHand[3]
-    // dealersCards.appendChild(dealerNewCard)
 
     if (dealerHandValue > 21) {
         console.log('dealer bust')
@@ -425,7 +422,8 @@ function stand() {
     }
 
     console.log('prepare to compare')
-    setTimeout(compareHands, 7500)
+    compareHands()
+        // setTimeout(compareHands, 5000)
 }
 
 function compareHands() {
@@ -433,11 +431,15 @@ function compareHands() {
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
         dealerWin = true
+        playerResultText = "Player Busts"
+        dealerResultText = "Dealer Wins!"
         displayHandResults()
             // nextHand()
     } else if (playerBust === true && dealerBust === true) {
         console.log('Dealer Wins')
         dealerWin = true
+        playerResultText = "Player Busts"
+        dealerResultText = "Dealer Busts, but still wins!"
         displayHandResults()
             // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
@@ -445,12 +447,16 @@ function compareHands() {
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
+        playerResultText = "Player Wins!"
+        dealerResultText = "Dealer Loses"
         displayHandResults()
             // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
-        console.log(dealerBust)
+
         console.log('dealer wins!')
         dealerWin = true
+        playerResultText = "Player Loses"
+        dealerResultText = "Dealer Wins!"
         displayHandResults()
             // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
@@ -458,6 +464,8 @@ function compareHands() {
         payOutAmount = wagerAmount * 1
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
+        playerResultText = "Push!"
+        dealerResultText = "Push!"
         displayHandResults()
             // nextHand()
     } else if ((playerBust !== true && dealerBust === true) && (playerHandValue < 21)) {
@@ -465,6 +473,8 @@ function compareHands() {
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
+        playerResultText = "Player Wins!"
+        dealerResultText = "Dealer Busts"
         displayHandResults()
             // nextHand()
     }
@@ -476,14 +486,21 @@ function displayHandResults() {
     console.log(playerWin)
     console.log(dealerWin)
     if (dealerWin) {
-        dCardHeader.innerText = 'Dealer Wins!'
-        pCardHeader.innerText = 'Player Loses'
+        console.log('dealer wins')
+        dealersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
     } else if (playerWin) {
-        dCardHeader.innerText = 'Dealer Loses'
-        pCardHeader.innerText = 'Player Wins!'
+        console.log('player wins')
+        playersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
     } else if (gamePush) {
-        dCardHeader.innerText = 'Push'
-        pCardHeader.innerText = 'Push'
+        console.log('push')
+        dealersCards.style.backgroundColor = 'white'
+        playersCards.style.backgroundColor = 'white'
+        dCardHeader.innerText = dealerResultText
+        pCardHeader.innerText = playerResultText
     }
     // console.log('will the display change?')
     // dealersCards.innerText = 'Dealer Wins!'
@@ -494,6 +511,9 @@ function displayHandResults() {
 function nextHand() {
     dealersCards.innerText = 'Dealer Cards'
     playersCards.innerText = 'Player Cards'
+    dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+
     dealerShownCards = document.querySelectorAll('.dealer-card')
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
@@ -506,7 +526,7 @@ function nextHand() {
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
-    inputWager.value = null
+        // inputWager.value = null
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
     playerHand = []
