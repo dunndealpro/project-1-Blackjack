@@ -33,7 +33,9 @@ let dealerHand = [],
     playerBust,
     dealerBust,
     blackJack,
-    gamePush;
+    gamePush,
+    playerWin,
+    dealerWin;
 
 // let state = {
 //     dealerHand: dealerHand,
@@ -57,6 +59,7 @@ const playerOne = document.querySelector('#player-one')
 const playerTwo = document.querySelector('#player-two')
 const playerThree = document.querySelector('#player-three')
 const playerFour = document.querySelector('#player-four')
+const handResults = document.getElementById('hand-results')
 
 // Player Choices
 
@@ -69,7 +72,7 @@ const standButton = document.querySelector('#stand')
 const continueButton = document.querySelector('.continue')
 const yesButton = document.querySelector('.yes')
 const noButton = document.querySelector('.no')
-const restartButton = document.querySelector('.restart')
+const nextHandButton = document.querySelector('#restart')
 const playerSelected = document.querySelectorAll('.player')
 const letsPlayButton = document.querySelector('.lets-play')
 
@@ -90,6 +93,8 @@ const currentWager = document.getElementById('wager-amt')
 const currentHandCount = document.getElementById('hand-count')
 const enterWager = document.querySelector('.player-enter-wager')
 const inputWager = document.getElementById('input-wager')
+const dCardHeader = document.getElementById('dcard-header')
+const pCardHeader = document.getElementById('pcard-header')
     // const playerCardTotal = document.getElementById('#player-card-total')
 
 
@@ -161,6 +166,7 @@ function gameStart() {
 
 function goToTheTable() {
     mainScreen.removeChild(balanceAmount)
+    gameTable.removeChild(handResults)
     mainScreen.appendChild(gameTable)
     mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
@@ -426,34 +432,68 @@ function compareHands() {
     console.log('compare starts')
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
-        nextHand()
+        dealerWin = true
+        displayHandResults()
+            // nextHand()
     } else if (playerBust === true && dealerBust === true) {
         console.log('Dealer Wins')
-        nextHand()
+        dealerWin = true
+        displayHandResults()
+            // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
         console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
-        nextHand()
+        playerWin = true
+        displayHandResults()
+            // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
         console.log(dealerBust)
         console.log('dealer wins!')
-        nextHand()
+        dealerWin = true
+        displayHandResults()
+            // nextHand()
     } else if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
         console.log('game is a push')
         payOutAmount = wagerAmount * 1
         currentBalanceAmt = currentBalanceAmt + payOutAmount
-        nextHand()
+        gamePush = true
+        displayHandResults()
+            // nextHand()
     } else if ((playerBust !== true && dealerBust === true) && (playerHandValue < 21)) {
         console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
-        nextHand()
+        playerWin = true
+        displayHandResults()
+            // nextHand()
     }
     currentBalance.innerText = currentBalanceAmt
 }
 
+function displayHandResults() {
+    console.log('display results invoked')
+    console.log(playerWin)
+    console.log(dealerWin)
+    if (dealerWin) {
+        dCardHeader.innerText = 'Dealer Wins!'
+        pCardHeader.innerText = 'Player Loses'
+    } else if (playerWin) {
+        dCardHeader.innerText = 'Dealer Loses'
+        pCardHeader.innerText = 'Player Wins!'
+    } else if (gamePush) {
+        dCardHeader.innerText = 'Push'
+        pCardHeader.innerText = 'Push'
+    }
+    // console.log('will the display change?')
+    // dealersCards.innerText = 'Dealer Wins!'
+    // playersCards.innerText = 'Player Loses'
+    // setTimeout(nextHand(), 3000)
+}
+
 function nextHand() {
+    dealersCards.innerText = 'Dealer Cards'
+    playersCards.innerText = 'Player Cards'
     dealerShownCards = document.querySelectorAll('.dealer-card')
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
@@ -475,6 +515,8 @@ function nextHand() {
     dealerBust = false
     blackJack = null
     gamePush = null
+    playerWin = null
+    dealerWin = null
 }
 
 
@@ -487,6 +529,7 @@ letsPlayButton.addEventListener("click", gameStart)
 dealButton.addEventListener("click", dealCards)
 hitButton.addEventListener('click', hitMe)
 standButton.addEventListener('click', stand)
+nextHandButton.addEventListener('click', nextHand)
 
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)

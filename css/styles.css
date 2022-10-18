@@ -242,10 +242,7 @@ input {
     justify-content: center;
 }
 
-#restart {
-    border: solid 2px rgb(86, 133, 139);
-    background: rgb(86, 133, 139);
-}
+#restart {}
 
 .smaller-container {
     display: flex;

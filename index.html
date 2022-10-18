@@ -63,13 +63,13 @@
         </div>
         <div class="game-table">
             <div id="dealer-play" class="small-container"><img src="img/yog-dealer.png" alt="picture of yogibear">Dealer</div>
-            <div id="dealers-cards" class="large-container">Dealer's Cards</div>
+            <div id="dealers-cards" class="large-container"><span id="dcard-header">Dealer's Cards</span> </div>
             <div id="card-deck" class="small-container">
                 <div id='card-deck-inplay'>cards go here</div>
 
             </div>
             <div id="player-info" class="small-container"></div>
-            <div id="players-cards" class="large-container">Player's Cards
+            <div id="players-cards" class="large-container"><span id="pcard-header">Player's Cards</span>
                 <div class="player-enter-wager"> Enter Wager</div>
                 <input id="input-wager" type="number">
                 <div class="deal-button">Deal</div>
@@ -88,7 +88,7 @@
                 <div id="insurance" class="gameplay-info"><span>Insurance:</span><br><span id="insurance">N/A</span></div>
             </div>
             <div id="restart" class="smaller-container">
-                <p> </p>
+                <p>Next Hand</p>
             </div>
 
             <div id="hit-me" class="smaller-container">
@@ -100,6 +100,8 @@
             <div id="exit-quit" class="smaller-container">
                 <p>Exit</p>
             </div>
+
+            <div id="hand-results" class="large-container"></div>
 
         </div>
     </div>
