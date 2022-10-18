@@ -242,11 +242,16 @@ input {
     justify-content: center;
 }
 
+#restart {
+    border: solid 2px rgb(86, 133, 139);
+    background: rgb(86, 133, 139);
+}
+
 .smaller-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-content: center; */
+    align-content: center;
     align-items: center;
     background-color: lightgrey;
     border: solid 3px black;

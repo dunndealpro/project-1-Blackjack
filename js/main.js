@@ -247,6 +247,7 @@ function checkForBlackJack() {
         console.log('no black jack')
         return blackJack = false, gamePush = false
     }
+    setTimeout(nextHand(), 2000)
 }
 
 function updateDealerCards() {
@@ -378,65 +379,51 @@ function hitMe() {
     }
 }
 
-// function stand() {
-//     dealerDownCard.textContent = dealerHand[1]
-//     while (dealerHandValue < 16) {
-//         setTimeout(() => {
-//             dealerDownCard.textContent = dealerHand[1]
-//             dealerHand.push(dealRandomCard())
-//         })
-//     }, 1500);
-
-// }
-
-// function stand() {
-//     dealerDownCard = document.getElementById('dealer-down')
-//     dealerDownCard.textContent = dealerHand[1]
-//     let tempDealerValue = dealerHandValue
-//     while (tempDealerValue < 16) {
-//         setTimeout(() => {
-//             dealerHand.push(dealRandomCard())
-//             let dealerNextCard = createElement('div')
-//             dealerNextCard.textContent = dealerHand[]
-//         }, 1500);
-
-//     }
-// }
-
 function stand() {
     console.log('stand function invoked')
     dealerDownCard = document.getElementById('down-card')
     dealerDownCard.textContent = dealerHand[1]
 
-    // console.log(tempDealerValue)
+    // give more cards to dealer until dealer gets at least 16
     while (dealerHandValue <= 16) {
         dealerHand.push(dealRandomCard())
-            // console.log(dealerHand)
-        determineDealerHandValue(dealerHand)
+        console.log('dealer gets card')
         console.log(dealerHand)
-            // setTimeout(() => {
-            //     let dealerShowCard = document.createElement('div')
-            //     dealerShowCard.setAttribute("class", "dealer-card")
-            //     dealerShowCard.textContent = dealerHand[dealerHand.length - 1]
-            //     dealersCards.appendChild(dealerShowCard)
-            // }, 1500);
-        console.log('prepare to compare')
-            // setTimeout(compareHands, 2500)
-
+        determineDealerHandValue(dealerHand)
     }
 
+    // update dealer shown cards 
+    // not running do not know why
+    for (let i = 2; i < dealerHand.length; i++) {
+        console.log('update dealer cards')
+        let dealerNewCard = document.createElement('div')
+        dealerNewCard.setAttribute("class", "dealer-card")
+        dealerNewCard.textContent = dealerHand[i]
+        setTimeout(() => {
+            dealersCards.appendChild(dealerNewCard)
+            console.log('card should be shown')
+        }, 2500);
+    }
+
+    // console.log('update dealer cards')
+    // let dealerNewCard = document.createElement('div')
+    // dealerNewCard.setAttribute("class", "dealer-card")
+    // dealerNewCard.textContent = dealerHand[3]
+    // dealersCards.appendChild(dealerNewCard)
 
     if (dealerHandValue > 21) {
         console.log('dealer bust')
         dealerBust = true
-        console.log('prepare to compare')
-
-        // setTimeout(compareHands, 2500)
+    } else {
+        dealerBust = false
     }
-    setTimeout(compareHands, 2500)
+
+    console.log('prepare to compare')
+    setTimeout(compareHands, 7500)
 }
 
 function compareHands() {
+    console.log('compare starts')
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
         nextHand()
