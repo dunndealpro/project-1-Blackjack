@@ -212,9 +212,15 @@ function dealCards() {
     playersCards.removeChild(enterWager)
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
-    if (wagerAmount <= currentBalanceAmt && wagerAmount > 0) {
+    wagerAmount = parseInt(wagerAmount)
+    currentBalanceAmt = parseInt(currentBalanceAmt)
+    console.log(typeof wagerAmount)
+    console.log(typeof currentBalanceAmt)
+    console.log(currentBalanceAmt - wagerAmount)
+    if ((wagerAmount <= currentBalanceAmt) && (wagerAmount > 0)) {
         dealFirstTwoCards()
     } else {
+        // console.log('da fudge?')
         playersCards.replaceWith(insufficientFunds)
             // gameTable.removeChild(playersCards)
             // gameTable.appendChild(insufficientFunds)
@@ -610,8 +616,6 @@ function nextHand() {
             // exit()
     }
 }
-
-
 
 /*----- event listeners -----*/
 
