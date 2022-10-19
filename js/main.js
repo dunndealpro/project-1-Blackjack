@@ -103,6 +103,8 @@ const inputWager = document.getElementById('input-wager')
 const dCardHeader = document.getElementById('dcard-header')
 const pCardHeader = document.getElementById('pcard-header')
 const insufficientFunds = document.getElementById('insufficient-funds')
+const gameplayPlayerCards = document.querySelector('.gameplay-player-cards')
+console.log(gameplayPlayerCards)
     // const playerCardTotal = document.getElementById('#player-card-total')
 
 // Reset Game
@@ -220,7 +222,7 @@ function dealCards() {
     if ((wagerAmount <= currentBalanceAmt) && (wagerAmount > 0)) {
         dealFirstTwoCards()
     } else {
-        // console.log('da fudge?')
+
         playersCards.replaceWith(insufficientFunds)
             // gameTable.removeChild(playersCards)
             // gameTable.appendChild(insufficientFunds)
@@ -311,7 +313,7 @@ function updatePlayerCards() {
         let gameCard = document.createElement('div')
         gameCard.setAttribute("id", "player-shown")
         gameCard.textContent = card
-        playersCards.appendChild(gameCard)
+        gameplayPlayerCards.appendChild(gameCard)
             // console.log(card)
     })
 }
@@ -413,7 +415,7 @@ function hitMe() {
         let gameCard = document.createElement('div')
         gameCard.setAttribute("id", "player-shown")
         gameCard.textContent = playerHand[playerHand.length - 1]
-        playersCards.appendChild(gameCard)
+        gameplayPlayerCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
         console.log('Player Busted!')
@@ -589,7 +591,7 @@ function nextHand() {
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
     playerShownCards.forEach(function(card) {
-        playersCards.removeChild(card)
+        gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
         dealersCards.removeChild(card)
@@ -649,7 +651,7 @@ function exit() {
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
     playerShownCards.forEach(function(card) {
-        playersCards.removeChild(card)
+        gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
         dealersCards.removeChild(card)
@@ -689,7 +691,7 @@ function exitOver() {
     playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
     playerShownCards.forEach(function(card) {
-        playersCards.removeChild(card)
+        gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
         dealersCards.removeChild(card)
