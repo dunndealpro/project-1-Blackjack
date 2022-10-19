@@ -267,6 +267,19 @@ input {
     grid-column: span 1;
 }
 
+#game-over {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    background-color: seagreen;
+    border: solid 2px black;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    width: 500px;
+    height: 350px;
+}
+
 #restart {}
 
 .smaller-container {
