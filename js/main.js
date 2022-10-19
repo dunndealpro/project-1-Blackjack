@@ -93,7 +93,7 @@ console.log(playersCards)
 const imageDealer = document.querySelector('.image-dealer')
 const playerInfo = document.querySelector('#player-info')
 const playerHandInfo = document.querySelector('.player-hand-info')
-const imageCardDeck = document.querySelector('.card-deck')
+const imageCardDeck = document.querySelector('.small-container-deck')
 const imagePayOut = document.querySelector('.payout')
 const currentBalance = document.getElementById('bal-amt')
 const currentWager = document.getElementById('wager-amt')
@@ -182,7 +182,9 @@ function goToTheTable() {
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
     playerPhoto.src = playerName[0].currentSrc
     playerInfo.appendChild(playerPhoto)
-    cardDeckInPlay.appendChild(cardBackImg)
+        // imageCardDeck.classList.add('card', 'small-container-deck')
+    imageCardDeck.appendChild(cardBackImg)
+        // cardDeckInPlay.appendChild(cardBackImg)
         // currentBalanceAmt = startingBalance
     currentBalance.innerText = currentBalanceAmt
     generateCards()

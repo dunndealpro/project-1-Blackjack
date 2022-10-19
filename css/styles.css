@@ -169,6 +169,7 @@ li {
     display: flex;
     flex-direction: column;
     margin: 20px;
+    text-align: center;
     align-items: center;
     justify-content: center;
     /* font-size: 25px; */
@@ -227,6 +228,53 @@ input {
     max-height: 150px;
     align-content: center;
     text-align: center;
+    width: auto;
+    height: auto;
+}
+
+.small-container-deck {
+    display: flex;
+    flex-direction: column;
+    background-color: coral;
+    border: solid 3px black;
+    margin: 15px;
+    align-content: center;
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+}
+
+
+/* .small-container-deck img {
+    position: absolute;
+    bottom: 0;
+    max-width: 150px;
+    max-height: 150px;
+    border: solid black 2px;
+    align-content: center;
+    text-align: center;
+    width: auto;
+    height: auto;
+} */
+
+#card-deck {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.small-container-deck img {
+    position: relative;
+    bottom: 0;
+    max-width: 175px;
+    max-height: 175px;
+    align-content: center;
+    text-align: center;
+    background-color: white;
+    border: black solid 1px;
+    border-radius: 7px;
     width: auto;
     height: auto;
 }
@@ -294,8 +342,6 @@ input {
     height: 350px;
 }
 
-#restart {}
-
 .smaller-container {
     display: flex;
     flex-direction: column;
@@ -329,16 +375,18 @@ input {
     justify-content: center;
 }
 
-#card-deck-inplay {
+
+/* #card-deck-inplay {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    align-content: center;
     margin: 5px;
     height: 100%;
     background-color: lightgrey;
     border: 2px solid black;
-}
+} */
 
 .player-enter-wager {
     margin-top: 20px;
@@ -356,9 +404,9 @@ input {
 @charset "UTF-8";
 .card {
     box-sizing: border-box;
-    display: inline-block;
+    /* display: inline-block; */
     margin: 5px 5px 50px 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
     /* Set the card's dimensions, and size it relative to
      it's font size. */
     font-size: inherit;
