@@ -105,6 +105,7 @@ const pCardHeader = document.getElementById('pcard-header')
 const insufficientFunds = document.getElementById('insufficient-funds')
 const gameplayPlayerCards = document.querySelector('.gameplay-player-cards')
 const gameplayDealerCards = document.querySelector('.gameplay-dealer-cards')
+const cardDeckInPlay = document.getElementById('card-deck-inplay')
 console.log(gameplayPlayerCards)
     // const playerCardTotal = document.getElementById('#player-card-total')
 
@@ -116,7 +117,6 @@ let suits = ['s', 'c', 'd', 'h']
 let newDeck = []
 
 console.log(values[12])
-
 
 
 /*----- functions -----*/
@@ -182,6 +182,7 @@ function goToTheTable() {
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
     playerPhoto.src = playerName[0].currentSrc
     playerInfo.appendChild(playerPhoto)
+    cardDeckInPlay.appendChild(cardBackImg)
         // currentBalanceAmt = startingBalance
     currentBalance.innerText = currentBalanceAmt
     generateCards()
@@ -578,7 +579,6 @@ function displayHandResults() {
     }
 
 }
-
 // 
 
 function nextHand() {
@@ -738,3 +738,11 @@ function init() {
 }
 
 init()
+
+/*-----Card Images-----*/
+// const playerOneImage = new Image(200, 150)
+// playerOneImage.src = 'img/sparky.png'
+
+
+const cardBackImg = new Image(150, 100)
+cardBackImg.src = 'img/cardimages/blue.svg'

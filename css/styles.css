@@ -330,6 +330,10 @@ input {
 }
 
 #card-deck-inplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin: 5px;
     height: 100%;
     background-color: lightgrey;
