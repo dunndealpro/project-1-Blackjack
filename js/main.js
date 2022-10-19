@@ -317,7 +317,7 @@ function updateDealerCards() {
     let tempDownCardImg = new Image(150, 100)
     tempDownCardImg.setAttribute('id', 'down-card-img')
     tempDownCardImg.src = '/img/cardimages/blue.svg'
-    tempDownCardImg.style.transform = 'translatex(-50px)'
+        // tempDownCardImg.style.transform = 'translatex(-50px)'
         // gameplayDealerCards.appendChild(dealerDownCard)
     gameplayDealerCards.appendChild(tempDownCardImg)
 }
@@ -331,8 +331,8 @@ function updatePlayerCards() {
         gameCard.setAttribute("id", "player-shown-img")
         console.log(card)
         gameCard.src = `/img/cardimages/${playerHand[i]}.svg`
-        gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
-        playerTransDist += 80
+            // gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
+            // playerTransDist += 80
         i++
         gameplayPlayerCards.appendChild(gameCard)
             // console.log(card)
@@ -438,8 +438,8 @@ function hitMe() {
         gameCard.setAttribute("id", "player-shown-img")
         gameCard.src = `/img/cardimages/${playerHand[playerHand.length - 1]}.svg`
             // gameCard.textContent = playerHand[playerHand.length - 1]
-        gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
-        playerTransDist += 80
+            // gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
+            // playerTransDist += 80
         gameplayPlayerCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
@@ -459,7 +459,7 @@ function stand() {
     tempDownCardImg = new Image(150, 100)
     tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
     tempDownCardImg.src = `/img/cardimages/${dealerHand[1]}.svg`
-    tempDownCardImg.style.transform = 'translateX(-50px)'
+        // tempDownCardImg.style.transform = 'translateX(-50px)'
     gameplayDealerCards.appendChild(tempDownCardImg)
 
 
@@ -470,16 +470,16 @@ function stand() {
         console.log(dealerHand)
         determineDealerHandValue(dealerHand)
     }
-    let transformDist = 100
+    // let transformDist = 100
 
     for (let i = 2; i < dealerHand.length; i++) {
 
         let dealerNewCardImg = new Image(150, 100)
         dealerNewCardImg.setAttribute('id', 'dealer-new-card-img')
         dealerNewCardImg.src = `/img/cardimages/${dealerHand[i]}.svg`
-        dealerNewCardImg.style.transform = "translateX(-" + transformDist + "px)"
+            // dealerNewCardImg.style.transform = "translateX(-" + transformDist + "px)"
         gameplayDealerCards.appendChild(dealerNewCardImg)
-        transformDist += 50
+            // transformDist += 50
             // setTimeout(() => {
             //     dealersCards.appendChild(dealerNewCard)
             //     console.log('card should be shown')
@@ -627,6 +627,13 @@ function nextHand() {
     dealerShownCards.forEach(function(card) {
         gameplayDealerCards.removeChild(card)
     })
+
+    dealerDownCard = document.getElementById('down-card-img')
+
+    if (dealerDownCard === true) {
+
+        gameplayDealerCards.removeChild(dealerDownCard)
+    }
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
@@ -684,14 +691,17 @@ function exit() {
     playerShownCards = document.querySelectorAll('#player-shown-img')
     dealerDownCard = document.getElementById('down-card-img')
 
-    gameplayDealerCards.removeChild(dealerDownCard)
-        // console.log(playerShownCards)
-        // playerShownCards.forEach(function(card) {
-        //     gameplayPlayerCards.removeChild(card)
-        // })
-        // dealerShownCards.forEach(function(card) {
-        //     gameplayDealerCards.removeChild(card)
-        // })
+    if (dealerDownCard === true) {
+
+        gameplayDealerCards.removeChild(dealerDownCard)
+    }
+    // console.log(playerShownCards)
+    // playerShownCards.forEach(function(card) {
+    //     gameplayPlayerCards.removeChild(card)
+    // })
+    // dealerShownCards.forEach(function(card) {
+    //     gameplayDealerCards.removeChild(card)
+    // })
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
@@ -759,8 +769,10 @@ function exitOver() {
     mainScreen.appendChild(gameTable)
     mainScreen.appendChild(gameOver)
     mainScreen.appendChild(rulesButton)
-        // dealerDownCard = document.getElementById('down-card-img')
-
+    dealerDownCard = document.getElementById('down-card-img')
+    if (dealerDownCard === true) {
+        gameplayDealerCards.removeChild(dealerDownCard)
+    }
     // gameplayDealerCards.removeChild(dealerDownCard)
     mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
     backGround.style.backgroundColor = 'rgb(177, 154, 24)'
