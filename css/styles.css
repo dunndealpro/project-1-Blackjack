@@ -280,9 +280,11 @@ input {
 }
 
 .large-container {
+    place-items: center;
     grid-column: span 2;
-    /* display: grid; */
-    grid-template-columns: 3;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-columns: 3; */
     background-color: rgb(177, 154, 24);
     border: solid 3px black;
     margin: 15px;
@@ -292,14 +294,97 @@ input {
     justify-content: center;
     align-content: center;
     align-items: center;
+    /* display: flex; */
+}
+
+#dealer-card {
+    display: flex;
+    /* flex-direction: column; */
+    /* place-items: center; */
+    justify-content: center;
+    align-items: center;
+}
+
+.gameplay-player-cards img {
+    /* display: flex; */
+    /* place-items: center; */
+    flex-direction: row;
+    justify-content: center;
+    /* gap: 5px; */
+    /* position: relative; */
+    /* max-width: 150px; */
+    max-height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* overflow: hidden; */
+    align-content: center;
+    text-align: center;
+    /* width: auto; */
+    /* height: auto; */
+}
+
+#player-shown-img {
+    background-color: white;
 }
 
 .gameplay-dealer-cards {
+    /* overflow: hidden; */
+    /* place-items: center; */
     display: flex;
+    /* flex-direction: row; */
+    /* justify-content: left; */
+    /* align-content: center; */
+    /* padding: -5px; */
+    /* gap: -36px; */
+}
+
+.gameplay-dealer-cards img:first-child {
+    overflow: visible;
+}
+
+
+/* .gameplay-dealer-cards img {
+    width: 10em;
+    min-width: 10em;
+    height: 6em;
+    border-radius: 0.5em;
+    border: solid #666 1px;
+    background-color: #ccc;
+    padding: 0.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.gameplay-dealer-cards img {
+    /* display: flex; */
+    /* place-items: center; */
     flex-direction: row;
     justify-content: center;
-    gap: 5px;
+    /* gap: 5px; */
+    /* position: relative; */
+    /* max-width: 150px; */
+    max-height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* overflow: hidden; */
+    align-content: center;
+    text-align: center;
+    /* width: auto; */
+    /* height: auto; */
 }
+
+
+/* #down-card-img {
+    transform: translateX(-50px);
+}
+
+#dealer-new-card-img {
+    transform: translateX(-100px);
+} */
 
 .gameplay-player-cards {
     display: flex;

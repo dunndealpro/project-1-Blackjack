@@ -184,8 +184,9 @@ function goToTheTable() {
     playerInfo.appendChild(playerPhoto)
         // imageCardDeck.classList.add('card', 'small-container-deck')
     imageCardDeck.appendChild(cardBackImg)
-        // cardDeckInPlay.appendChild(cardBackImg)
-        // currentBalanceAmt = startingBalance
+
+    // cardDeckInPlay.appendChild(cardBackImg)
+    // currentBalanceAmt = startingBalance
     currentBalance.innerText = currentBalanceAmt
     generateCards()
 }
@@ -303,20 +304,36 @@ function checkForBlackJack() {
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
-    dealerShowCard.textContent = dealerHand[0]
+    console.log(dealerHand[0])
+    let tempCardImg = new Image(150, 100)
+    tempCardImg.setAttribute('id', 'dealer-new-card-img')
+    tempCardImg.src = `/img/cardimages/${dealerHand[0]}.svg`
+        // dealerShowCard.textContent = dealerHand[0]
     gameplayDealerCards.appendChild(dealerShowCard)
+    gameplayDealerCards.appendChild(tempCardImg)
     let dealerDownCard = document.createElement('div')
     dealerDownCard.setAttribute("id", "down-card")
     dealerDownCard.setAttribute("class", "dealer-card")
-    dealerDownCard.textContent = '**'
-    gameplayDealerCards.appendChild(dealerDownCard)
+    let tempDownCardImg = new Image(150, 100)
+    tempDownCardImg.setAttribute('id', 'down-card-img')
+    tempDownCardImg.src = '/img/cardimages/blue.svg'
+    tempDownCardImg.style.transform = 'translatex(-50px)'
+        // gameplayDealerCards.appendChild(dealerDownCard)
+    gameplayDealerCards.appendChild(tempDownCardImg)
 }
 
 function updatePlayerCards() {
+    playerTransDist = 50
+    i = 0
     playerHand.forEach(function(card) {
         let gameCard = document.createElement('div')
-        gameCard.setAttribute("id", "player-shown")
-        gameCard.textContent = card
+        gameCard = new Image(150, 100)
+        gameCard.setAttribute("id", "player-shown-img")
+        console.log(card)
+        gameCard.src = `/img/cardimages/${playerHand[i]}.svg`
+        gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
+        playerTransDist += 50
+        i++
         gameplayPlayerCards.appendChild(gameCard)
             // console.log(card)
     })
@@ -411,14 +428,18 @@ function upDatePlayerHandValue() {
 }
 
 function hitMe() {
+    playerTransDist = 150
     if (dBlackJack !== true && gamePush !== true && pBlackJack !== true) {
         playerHand.push(dealRandomCard())
         console.log('Player Hand = ' + playerHand)
         determinePlayerHandValue(playerHand)
         upDatePlayerHandValue()
-        let gameCard = document.createElement('div')
-        gameCard.setAttribute("id", "player-shown")
-        gameCard.textContent = playerHand[playerHand.length - 1]
+        gameCard = new Image(150, 100)
+        gameCard.setAttribute("id", "player-shown-img")
+        gameCard.src = `/img/cardimages/${playerHand[playerHand.length - 1]}.svg`
+            // gameCard.textContent = playerHand[playerHand.length - 1]
+        gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
+        playerTransDist += 50
         gameplayPlayerCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
@@ -431,8 +452,16 @@ function hitMe() {
 
 function stand() {
     console.log('stand function invoked')
-    dealerDownCard = document.getElementById('down-card')
-    dealerDownCard.textContent = dealerHand[1]
+        // dealerDownCard = document.getElementById('down-card')
+        // dealerDownCard.textContent = dealerHand[1]
+    tempDownCardImg = document.getElementById('down-card-img')
+    gameplayDealerCards.removeChild(tempDownCardImg)
+    tempDownCardImg = new Image(150, 100)
+    tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
+    tempDownCardImg.src = `/img/cardimages/${dealerHand[1]}.svg`
+    tempDownCardImg.style.transform = 'translateX(-50px)'
+    gameplayDealerCards.appendChild(tempDownCardImg)
+
 
     // give more cards to dealer until dealer gets at least 16
     while (dealerHandValue <= 16) {
@@ -441,28 +470,27 @@ function stand() {
         console.log(dealerHand)
         determineDealerHandValue(dealerHand)
     }
+    let transformDist = 100
 
-    // update dealer shown cards 
-    // not running do not know why
     for (let i = 2; i < dealerHand.length; i++) {
-        console.log('update dealer cards')
-        let dealerNewCard = document.createElement('div')
-        dealerNewCard.setAttribute("class", "dealer-card")
-        dealerNewCard.textContent = dealerHand[i]
-        gameplayDealerCards.appendChild(dealerNewCard)
+
+        let dealerNewCardImg = new Image(150, 100)
+        dealerNewCardImg.setAttribute('id', 'dealer-new-card-img')
+        dealerNewCardImg.src = `/img/cardimages/${dealerHand[i]}.svg`
+        dealerNewCardImg.style.transform = "translateX(-" + transformDist + "px)"
+        gameplayDealerCards.appendChild(dealerNewCardImg)
+        transformDist += 50
             // setTimeout(() => {
             //     dealersCards.appendChild(dealerNewCard)
             //     console.log('card should be shown')
             // }, 1000);
     }
-
     if (dealerHandValue > 21) {
         console.log('dealer bust')
         dealerBust = true
     } else {
         dealerBust = false
     }
-
     console.log('prepare to compare')
     compareHands()
         // setTimeout(compareHands, 5000)
@@ -590,8 +618,8 @@ function nextHand() {
     playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
         // removeNotification = document.getElementById('notification') //these lines add to remove notification if wagerAmt is larger than current balance
         // playersCards.removeChild(removeNotification)
-    dealerShownCards = document.querySelectorAll('.dealer-card')
-    playerShownCards = document.querySelectorAll('#player-shown')
+    dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
+    playerShownCards = document.querySelectorAll('#player-shown-img')
         // console.log(playerShownCards)
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
@@ -650,9 +678,20 @@ function exit() {
     playersCards.appendChild(dealButton)
     gameTable.appendChild(handResults)
     gameTable.appendChild(insufficientFunds)
-    dealerShownCards = document.querySelectorAll('.dealer-card')
-    playerShownCards = document.querySelectorAll('#player-shown')
+        // dealerShownCards = document.querySelectorAll('.dealer-card')
+        // playerShownCards = document.querySelectorAll('#player-shown')
+    dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
+    playerShownCards = document.querySelectorAll('#player-shown-img')
+    dealerDownCard = document.getElementById('down-card-img')
+
+    gameplayDealerCards.removeChild(dealerDownCard)
         // console.log(playerShownCards)
+        // playerShownCards.forEach(function(card) {
+        //     gameplayPlayerCards.removeChild(card)
+        // })
+        // dealerShownCards.forEach(function(card) {
+        //     gameplayDealerCards.removeChild(card)
+        // })
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
@@ -690,9 +729,18 @@ function exitOver() {
     playersCards.appendChild(dealButton)
     gameTable.appendChild(handResults)
     gameTable.appendChild(insufficientFunds)
-    dealerShownCards = document.querySelectorAll('.dealer-card')
-    playerShownCards = document.querySelectorAll('#player-shown')
+        // dealerShownCards = document.querySelectorAll('.dealer-card')
+        // playerShownCards = document.querySelectorAll('#player-shown')
         // console.log(playerShownCards)
+        // playerShownCards.forEach(function(card) {
+        //     gameplayPlayerCards.removeChild(card)
+        // })
+        // dealerShownCards.forEach(function(card) {
+        //     gameplayDealerCards.removeChild(card)
+        // })
+    dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
+    playerShownCards = document.querySelectorAll('#player-shown-img')
+
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
@@ -711,7 +759,9 @@ function exitOver() {
     mainScreen.appendChild(gameTable)
     mainScreen.appendChild(gameOver)
     mainScreen.appendChild(rulesButton)
+        // dealerDownCard = document.getElementById('down-card-img')
 
+    // gameplayDealerCards.removeChild(dealerDownCard)
     mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
     backGround.style.backgroundColor = 'rgb(177, 154, 24)'
     currentHandCount.innerText = 'N/A'
@@ -748,3 +798,5 @@ init()
 
 const cardBackImg = new Image(150, 100)
 cardBackImg.src = 'img/cardimages/blue.svg'
+
+const cardFrontImg = new Image(150, 100)
