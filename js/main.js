@@ -323,7 +323,7 @@ function updateDealerCards() {
 }
 
 function updatePlayerCards() {
-    playerTransDist = 50
+    playerTransDist = 0
     i = 0
     playerHand.forEach(function(card) {
         let gameCard = document.createElement('div')
@@ -332,7 +332,7 @@ function updatePlayerCards() {
         console.log(card)
         gameCard.src = `/img/cardimages/${playerHand[i]}.svg`
         gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
-        playerTransDist += 50
+        playerTransDist += 80
         i++
         gameplayPlayerCards.appendChild(gameCard)
             // console.log(card)
@@ -428,7 +428,7 @@ function upDatePlayerHandValue() {
 }
 
 function hitMe() {
-    playerTransDist = 150
+    playerTransDist = 160
     if (dBlackJack !== true && gamePush !== true && pBlackJack !== true) {
         playerHand.push(dealRandomCard())
         console.log('Player Hand = ' + playerHand)
@@ -439,7 +439,7 @@ function hitMe() {
         gameCard.src = `/img/cardimages/${playerHand[playerHand.length - 1]}.svg`
             // gameCard.textContent = playerHand[playerHand.length - 1]
         gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
-        playerTransDist += 50
+        playerTransDist += 80
         gameplayPlayerCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
