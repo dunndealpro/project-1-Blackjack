@@ -246,6 +246,20 @@ input {
     align-items: center;
 }
 
+.gameplay-dealer-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
+.gameplay-player-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
 #ok-button-1 {
     /* grid-column: span 1; */
     text-align: center;

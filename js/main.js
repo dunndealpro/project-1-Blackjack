@@ -104,6 +104,7 @@ const dCardHeader = document.getElementById('dcard-header')
 const pCardHeader = document.getElementById('pcard-header')
 const insufficientFunds = document.getElementById('insufficient-funds')
 const gameplayPlayerCards = document.querySelector('.gameplay-player-cards')
+const gameplayDealerCards = document.querySelector('.gameplay-dealer-cards')
 console.log(gameplayPlayerCards)
     // const playerCardTotal = document.getElementById('#player-card-total')
 
@@ -111,7 +112,7 @@ console.log(gameplayPlayerCards)
 
 /*----- Deck Generator -----*/
 let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
-let suits = ['spades', 'clubs', 'diamonds', 'hearts']
+let suits = ['s', 'c', 'd', 'h']
 let newDeck = []
 
 console.log(values[12])
@@ -300,12 +301,12 @@ function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
     dealerShowCard.textContent = dealerHand[0]
-    dealersCards.appendChild(dealerShowCard)
+    gameplayDealerCards.appendChild(dealerShowCard)
     let dealerDownCard = document.createElement('div')
     dealerDownCard.setAttribute("id", "down-card")
     dealerDownCard.setAttribute("class", "dealer-card")
-    dealerDownCard.textContent = '*****'
-    dealersCards.appendChild(dealerDownCard)
+    dealerDownCard.textContent = '**'
+    gameplayDealerCards.appendChild(dealerDownCard)
 }
 
 function updatePlayerCards() {
@@ -445,7 +446,7 @@ function stand() {
         let dealerNewCard = document.createElement('div')
         dealerNewCard.setAttribute("class", "dealer-card")
         dealerNewCard.textContent = dealerHand[i]
-        dealersCards.appendChild(dealerNewCard)
+        gameplayDealerCards.appendChild(dealerNewCard)
             // setTimeout(() => {
             //     dealersCards.appendChild(dealerNewCard)
             //     console.log('card should be shown')
@@ -594,7 +595,7 @@ function nextHand() {
         gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
-        dealersCards.removeChild(card)
+        gameplayDealerCards.removeChild(card)
     })
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
@@ -654,7 +655,7 @@ function exit() {
         gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
-        dealersCards.removeChild(card)
+        gameplayDealerCards.removeChild(card)
     })
     mainScreen.removeChild(gameTable)
     mainScreen.appendChild(dealerOne)
@@ -694,7 +695,7 @@ function exitOver() {
         gameplayPlayerCards.removeChild(card)
     })
     dealerShownCards.forEach(function(card) {
-        dealersCards.removeChild(card)
+        gameplayDealerCards.removeChild(card)
     })
     mainScreen.removeChild(gameOver)
         // mainScreen.appendChild(gameTable)
