@@ -592,24 +592,6 @@ function nextHand() {
     }
 }
 
-/*----- event listeners -----*/
-
-rulesButton.addEventListener("click", showRules)
-backButton.addEventListener("click", handleBack)
-startButton.addEventListener("click", start)
-letsPlayButton.addEventListener("click", gameStart)
-dealButton.addEventListener("click", dealCards)
-hitButton.addEventListener('click', hitMe)
-standButton.addEventListener('click', stand)
-nextHandButton.addEventListener('click', nextHand)
-exitButton.addEventListener('click', exit)
-okButtonOne.addEventListener('click', insufficientBack)
-okButtonTwo.addEventListener('click', exitOver)
-
-playerSelected.forEach(function(player) {
-    player.addEventListener('click', getPlayerBalance)
-})
-
 function exit() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
@@ -733,6 +715,24 @@ function exitOver() {
     dealerWin = null
     init()
 }
+/*----- event listeners -----*/
+
+rulesButton.addEventListener("click", showRules)
+backButton.addEventListener("click", handleBack)
+startButton.addEventListener("click", start)
+letsPlayButton.addEventListener("click", gameStart)
+dealButton.addEventListener("click", dealCards)
+hitButton.addEventListener('click', hitMe)
+standButton.addEventListener('click', stand)
+nextHandButton.addEventListener('click', nextHand)
+exitButton.addEventListener('click', exit)
+okButtonOne.addEventListener('click', insufficientBack)
+okButtonTwo.addEventListener('click', exitOver)
+
+playerSelected.forEach(function(player) {
+    player.addEventListener('click', getPlayerBalance)
+})
+
 
 function init() {
     mainScreen.removeChild(ruleList)
