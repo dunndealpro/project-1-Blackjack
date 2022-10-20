@@ -214,6 +214,9 @@ function dealCards() {
     } else {
         playersCards.replaceWith(insufficientFunds)
     }
+    hitButton.addEventListener('click', hitMe)
+    standButton.addEventListener('click', stand)
+    exitButton.addEventListener('click', exit)
 }
 
 function insufficientBack() {
@@ -223,7 +226,6 @@ function insufficientBack() {
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
     inputWager.value = null
-
 }
 
 function dealFirstTwoCards() {
@@ -270,13 +272,16 @@ function checkForBlackJack() {
     }
 }
 
+function checkForDoubles() {
+
+}
+
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
     let tempCardImg = new Image(150, 100)
     tempCardImg.setAttribute('id', 'dealer-new-card-img')
     tempCardImg.src = `/img/cardimages/${dealerHand[0]}.svg`
-        // dealerShowCard.textContent = dealerHand[0]
     gameplayDealerCards.appendChild(dealerShowCard)
     gameplayDealerCards.appendChild(tempCardImg)
     let dealerDownCard = document.createElement('div')
@@ -285,8 +290,6 @@ function updateDealerCards() {
     let tempDownCardImg = new Image(150, 100)
     tempDownCardImg.setAttribute('id', 'down-card-img')
     tempDownCardImg.src = '/img/cardimages/blue.svg'
-        // tempDownCardImg.style.transform = 'translatex(-50px)'
-        // gameplayDealerCards.appendChild(dealerDownCard)
     gameplayDealerCards.appendChild(tempDownCardImg)
 }
 
@@ -401,7 +404,6 @@ function stand() {
         dealerHand.push(dealRandomCard())
         determineDealerHandValue(dealerHand)
     }
-
     for (let i = 2; i < dealerHand.length; i++) {
 
         let dealerNewCardImg = new Image(150, 100)
@@ -414,6 +416,8 @@ function stand() {
     } else {
         dealerBust = false
     }
+    hitButton.removeEventListener('click', hitMe)
+    standButton.removeEventListener('click', stand)
     compareHands()
 }
 
@@ -474,7 +478,7 @@ function compareHands() {
         dealerResultText = "Dealer Loses"
         displayHandResults()
     }
-
+    nextHandButton.addEventListener('click', nextHand)
     currentBalance.innerText = currentBalanceAmt
 }
 
@@ -519,7 +523,6 @@ function nextHand() {
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
-
     dealerShownCards.forEach(function(card) {
         gameplayDealerCards.removeChild(card)
     })
@@ -528,12 +531,21 @@ function nextHand() {
     if (document.contains(dealerDownCard)) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
-
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
+
+    clearGameInfo()
+
+    if (currentBalanceAmt <= 0) {
+        mainScreen.removeChild(gameTable)
+        mainScreen.appendChild(gameOver)
+    }
+}
+
+function clearGameInfo() {
     playerHand = []
     dealerHand = []
     playerBust = false
@@ -543,11 +555,6 @@ function nextHand() {
     gamePush = null
     playerWin = null
     dealerWin = null
-
-    if (currentBalanceAmt <= 0) {
-        mainScreen.removeChild(gameTable)
-        mainScreen.appendChild(gameOver)
-    }
 }
 
 function exit() {
@@ -585,15 +592,8 @@ function exit() {
     currentWager.innerText = 0
     inputWager.value = null
     startingBalance.value = null
-    playerHand = []
-    dealerHand = []
-    playerBust = false
-    dealerBust = false
-    dPlackJack = null
-    dPlackJack = null
-    gamePush = null
-    playerWin = null
-    dealerWin = null
+
+    clearGameInfo()
 }
 
 function exitOver() {
@@ -638,17 +638,20 @@ function exitOver() {
     currentWager.innerText = 0
     inputWager.value = null
     startingBalance.value = null
-    playerHand = []
-    dealerHand = []
-    playerBust = false
-    dealerBust = false
-    dPlackJack = null
-    dPlackJack = null
-    gamePush = null
-    playerWin = null
-    dealerWin = null
+
+    clearGameInfo()
+        // playerHand = []
+        // dealerHand = []
+        // playerBust = false
+        // dealerBust = false
+        // dPlackJack = null
+        // dPlackJack = null
+        // gamePush = null
+        // playerWin = null
+        // dealerWin = null
     init()
 }
+
 /*----- event listeners -----*/
 
 rulesButton.addEventListener("click", showRules)
@@ -656,10 +659,10 @@ backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
 letsPlayButton.addEventListener("click", gameStart)
 dealButton.addEventListener("click", dealCards)
-hitButton.addEventListener('click', hitMe)
-standButton.addEventListener('click', stand)
-nextHandButton.addEventListener('click', nextHand)
-exitButton.addEventListener('click', exit)
+    // hitButton.addEventListener('click', hitMe)
+    // standButton.addEventListener('click', stand)
+    // nextHandButton.addEventListener('click', nextHand)
+    // exitButton.addEventListener('click', exit)
 okButtonOne.addEventListener('click', insufficientBack)
 okButtonTwo.addEventListener('click', exitOver)
 
