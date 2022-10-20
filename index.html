@@ -15,12 +15,16 @@
 </head>
 
 <body>
-
     <h1>Yogi Bear's Casino</h1>
+
     <div class="main">
+
         <div class="dealer-one"><img src="img/yogi-dealer1-rough.png" alt="picture of yogibear"></div>
+
         <div class="start">CLICK to START</div>
+
         <div class="rules-button">Rules</div>
+
         <div class="rules-list">
             <li>Player is trying to beat the dealer by getting a count as close to 21 without going over 21</li>
             <li>Aces are worth either 1 or 11, player chooses its value</li>
@@ -37,55 +41,49 @@
             </li>
             <div class="back-button">Back</div>
         </div>
+
         <div class="start-page">
             <div id="choose">Choose Your Player</div>
-            <div class="player" id="player-one">
-                <p></p>
-            </div>
-            <div class="player" id="player-two">
-                <p></p>
-            </div>
-            <div class="player" id="player-three">
-                <p></p>
-            </div>
-            <div class="player" id="player-four">
-                <p></p>
-            </div>
-            <div class="player" id="player-five">
-                <p></p>
-            </div>
-            <div class="player" id="player-six">
-                <p></p>
-            </div>
+            <div class="player" id="player-one"></div>
+            <div class="player" id="player-two"></div>
+            <div class="player" id="player-three"></div>
+            <div class="player" id="player-four"></div>
+            <div class="player" id="player-five"></div>
+            <div class="player" id="player-six"></div>
         </div>
+
         <div class="balance-amount">
             <div>Enter Starting Balance</div>
             <input id='start-balance' type="number">
             <div class="lets-play">Let's Play!</div>
         </div>
+
         <div class="game-table">
             <div id="dealer-play" class="small-container"><img src="img/yog-dealer.png" alt="picture of yogibear">Yogi Bear</div>
+
             <div id="dealers-cards" class="large-container"><span id="dcard-header">Dealer's Cards</span>
                 <div class="gameplay-dealer-cards"></div>
             </div>
-            <div id="card-deck" class="small-container-deck">
-            </div>
+
+            <div id="card-deck" class="small-container-deck"></div>
+
             <div id="player-info" class="small-container"><span id="player-name">Player</span></div>
+
             <div id="players-cards" class="large-container"><span id="pcard-header">Player's Cards</span>
                 <div class="player-enter-wager"> Enter Wager</div>
                 <input id="input-wager" type="number">
                 <div class="deal-button">Deal</div>
                 <div class="gameplay-player-cards"></div>
-                <div class="gameplay-container">
-                </div>
-
+                <div class="gameplay-container"></div>
             </div>
+
             <div id="payout" class="small-container">
                 <div id="current-balance" class="gameplay-info"><span>Balance:</span> <br>$<span id="bal-amt">0</span> </div>
                 <div id="wager-amount" class="gameplay-info"><span>Wager: </span><br>$<span id="wager-amt">0</span></div>
                 <div id="player-card-total" class="gameplay-info"><span>Player Hand:</span><br><span id="hand-count">N/A </span></div>
                 <div id="insurance" class="gameplay-info"><span>Insurance:</span><br><span id="insurance">N/A</span></div>
             </div>
+
             <div id="restart" class="smaller-container">
                 <p>Next Hand</p>
             </div>
@@ -93,9 +91,11 @@
             <div id="hit-me" class="smaller-container">
                 <p>Hit Me</p>
             </div>
+
             <div id="stand" class="smaller-container">
                 <p>Stand</p>
             </div>
+
             <div id="exit-quit" class="smaller-container">
                 <p>Exit</p>
             </div>
@@ -108,6 +108,7 @@
                     <p>OK</p>
                 </div>
             </div>
+
         </div>
 
         <div id="game-over"><span>Woof!</span> <br><span>You lost all your money!</span><br>
@@ -116,7 +117,9 @@
             </div>
         </span>
         </div>
+
     </div>
+
 </body>
 
 </html>

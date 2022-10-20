@@ -2,12 +2,12 @@
 const playerOneName = 'Sparky'
 const playerOneImage = new Image(200, 150)
 playerOneImage.src = 'img/sparky.png'
-const playerThreeName = 'Burton'
-const playerThreeImage = new Image(200, 150)
-playerThreeImage.src = 'img/burton.png'
 const playerTwoName = 'Milo'
 const playerTwoImage = new Image(200, 150)
 playerTwoImage.src = 'img/milo2.png'
+const playerThreeName = 'Burton'
+const playerThreeImage = new Image(200, 150)
+playerThreeImage.src = 'img/burton.png'
 const playerFourName = 'Maddie'
 const playerFourImage = new Image(200, 150)
 playerFourImage.src = 'img/maddie.png'
@@ -17,7 +17,6 @@ playerFiveImage.src = 'img/mookie.png'
 const playerSixName = 'Chunk'
 const playerSixImage = new Image(200, 150)
 playerSixImage.src = 'img/chunk.png'
-
 const cardBackImg = new Image(150, 100)
 cardBackImg.src = 'img/cardimages/blue.svg'
 
@@ -73,7 +72,6 @@ const handResults = document.getElementById('hand-results')
 const gameOver = document.getElementById('game-over')
 
 // Player Choices
-
 const startButton = document.querySelector('.start')
 const rulesButton = document.querySelector('.rules-button')
 const wagerButton = document.querySelector('.wager')
@@ -110,12 +108,12 @@ const gameplayPlayerCards = document.querySelector('.gameplay-player-cards')
 const gameplayDealerCards = document.querySelector('.gameplay-dealer-cards')
 const cardDeckInPlay = document.getElementById('card-deck-inplay')
 
-// Reset Game
 
 /*----- Deck Generator -----*/
 let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 let suits = ['s', 'c', 'd', 'h']
 let newDeck = []
+let numberOfDecks = 4
 
 /*----- functions -----*/
 
@@ -174,7 +172,6 @@ function gameStart() {
     if (currentBalanceAmt > 0) {
         goToTheTable()
     }
-
 }
 
 function goToTheTable() {
@@ -196,11 +193,9 @@ function goToTheTable() {
             dealCards()
         }
     })
-
 }
 
 function generateCards() {
-    let numberOfDecks = 4
     for (let k = 0; k < numberOfDecks; k++) {
         for (let i = 0; i < values.length; i++) {
             for (let j = 0; j < suits.length; j++) {
@@ -290,10 +285,6 @@ function checkForBlackJack() {
     }
 }
 
-function checkForDoubles() {
-
-}
-
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
@@ -359,7 +350,6 @@ function determinePlayerHandValue(hand) {
 function determineDealerHandValue(hand) {
     tempVal = 0
     hand.forEach(function(value) {
-
         let cardVal = value.charAt(0)
         if (cardVal === 'A') {
             cardVal = 11
@@ -434,6 +424,7 @@ function stand() {
     } else {
         dealerBust = false
     }
+
     hitButton.removeEventListener('click', hitMe)
     standButton.removeEventListener('click', stand)
     compareHands()
@@ -677,10 +668,6 @@ backButton.addEventListener("click", handleBack)
 startButton.addEventListener("click", start)
 letsPlayButton.addEventListener("click", gameStart)
 dealButton.addEventListener("click", dealCards)
-    // hitButton.addEventListener('click', hitMe)
-    // standButton.addEventListener('click', stand)
-    // nextHandButton.addEventListener('click', nextHand)
-    // exitButton.addEventListener('click', exit)
 okButtonOne.addEventListener('click', insufficientBack)
 okButtonTwo.addEventListener('click', exitOver)
 
