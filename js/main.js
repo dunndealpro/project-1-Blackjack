@@ -160,6 +160,12 @@ function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
+    inputBalance = document.getElementById('start-balance')
+    inputBalance.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            gameStart()
+        }
+    })
 }
 
 function gameStart() {
@@ -184,6 +190,13 @@ function goToTheTable() {
     imageCardDeck.appendChild(cardBackImg)
     currentBalance.innerText = currentBalanceAmt
     generateCards()
+    inputWagerBox = document.getElementById('input-wager')
+    inputWagerBox.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            dealCards()
+        }
+    })
+
 }
 
 function generateCards() {
