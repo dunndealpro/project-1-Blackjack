@@ -21,6 +21,11 @@ playerSixImage.src = 'img/chunk.png'
 const cardBackImg = new Image(150, 100)
 cardBackImg.src = 'img/cardimages/blue.svg'
 
+const colorMagenta = 'rgb(191, 48, 163)'
+const colorCardTableGreen = 'rgb(177, 154, 24)'
+const colorLoseRed = 'rgb(248, 66, 66)'
+const colorBackgroundBlue = 'rgb(86, 133, 139)'
+
 /*-----variables -----*/
 let dealerHand = [],
     playerHand = [],
@@ -171,8 +176,8 @@ function goToTheTable() {
     gameTable.removeChild(handResults)
     gameTable.removeChild(insufficientFunds)
     mainScreen.appendChild(gameTable)
-    mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
-    backGround.style.backgroundColor = 'rgb(191, 48, 163)'
+    mainScreen.style.backgroundColor = colorMagenta
+    backGround.style.backgroundColor = colorMagenta
     playerPhoto.src = playerName[0].currentSrc
     playerInfo.innerText = playerName[1].innerText
     playerInfo.appendChild(playerPhoto)
@@ -485,23 +490,23 @@ function compareHands() {
 function displayHandResults() {
 
     if (dealerWin && dBlackJack) {
-        playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        playersCards.style.backgroundColor = colorLoseRed
         dealersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (playerWin && pBlackJack) {
         playersCards.style.backgroundColor = 'white'
-        dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        dealersCards.style.backgroundColor = colorLoseRed
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (dealerWin) {
-        playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        playersCards.style.backgroundColor = colorLoseRed
         dealersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (playerWin) {
         playersCards.style.backgroundColor = 'white'
-        dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
+        dealersCards.style.backgroundColor = colorLoseRed
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (gamePush) {
@@ -515,8 +520,8 @@ function displayHandResults() {
 function nextHand() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
-    dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
-    playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    dealersCards.style.backgroundColor = colorCardTableGreen
+    playersCards.style.backgroundColor = colorCardTableGreen
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
 
@@ -560,8 +565,8 @@ function clearGameInfo() {
 function exit() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
-    dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
-    playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    dealersCards.style.backgroundColor = colorCardTableGreen
+    playersCards.style.backgroundColor = colorCardTableGreen
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
@@ -586,8 +591,8 @@ function exit() {
     mainScreen.appendChild(dealerOne)
     mainScreen.appendChild(startButton)
     mainScreen.appendChild(rulesButton)
-    mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
-    backGround.style.backgroundColor = 'rgb(177, 154, 24)'
+    mainScreen.style.backgroundColor = colorBackgroundBlue
+    backGround.style.backgroundColor = colorCardTableGreen
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
     inputWager.value = null
@@ -599,8 +604,8 @@ function exit() {
 function exitOver() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
-    dealersCards.style.backgroundColor = 'rgb(177, 154, 24)'
-    playersCards.style.backgroundColor = 'rgb(177, 154, 24)'
+    dealersCards.style.backgroundColor = colorCardTableGreen
+    playersCards.style.backgroundColor = colorCardTableGreen
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
@@ -632,8 +637,8 @@ function exitOver() {
     if (dealerDownCard === true) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
-    mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
-    backGround.style.backgroundColor = 'rgb(177, 154, 24)'
+    mainScreen.style.backgroundColor = colorBackgroundBlue
+    backGround.style.backgroundColor = colorCardTableGreen
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
     inputWager.value = null
