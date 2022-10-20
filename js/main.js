@@ -1,5 +1,3 @@
-console.log("Connected to html file!")
-
 /*----- constants -----*/
 const playerOneName = 'Sparky'
 const playerOneImage = new Image(200, 150)
@@ -90,7 +88,6 @@ const okButtonTwo = document.getElementById('ok-button-2')
 // Display Game Info
 const dealersCards = document.querySelector('#dealers-cards')
 const playersCards = document.querySelector('#players-cards')
-console.log(playersCards)
 const imageDealer = document.querySelector('.image-dealer')
 const playerInfo = document.querySelector('#player-info')
 const playerHandInfo = document.querySelector('.player-hand-info')
@@ -107,7 +104,6 @@ const insufficientFunds = document.getElementById('insufficient-funds')
 const gameplayPlayerCards = document.querySelector('.gameplay-player-cards')
 const gameplayDealerCards = document.querySelector('.gameplay-dealer-cards')
 const cardDeckInPlay = document.getElementById('card-deck-inplay')
-console.log(gameplayPlayerCards)
 
 // Reset Game
 
@@ -159,13 +155,11 @@ function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
-    console.log(playerName)
 }
 
 function gameStart() {
     startingBalance = document.querySelector('input')
     currentBalanceAmt = startingBalance.value
-    console.log(startingBalance)
     if (currentBalanceAmt > 0) {
         goToTheTable()
     }
@@ -215,9 +209,6 @@ function dealCards() {
     playersCards.removeChild(dealButton)
     wagerAmount = parseInt(wagerAmount)
     currentBalanceAmt = parseInt(currentBalanceAmt)
-    console.log(typeof wagerAmount)
-    console.log(typeof currentBalanceAmt)
-    console.log(currentBalanceAmt - wagerAmount)
     if ((wagerAmount <= currentBalanceAmt) && (wagerAmount > 0)) {
         dealFirstTwoCards()
     } else {
@@ -242,8 +233,6 @@ function dealFirstTwoCards() {
     dealerHand.push(dealRandomCard())
     currentBalanceAmt = currentBalanceAmt - wagerAmount
     currentBalance.innerText = currentBalanceAmt
-    console.log('Player Hand = ' + playerHand)
-    console.log('Dealer Hand = ' + dealerHand)
     determinePlayerHandValue(playerHand)
     determineDealerHandValue(dealerHand)
     upDatePlayerHandValue()
@@ -264,12 +253,10 @@ function checkForBlackJack() {
         compareHands()
 
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
-        console.log("Hand is a push")
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
         compareHands()
     } else if (playerHandValue !== 21 && dealerHandValue === 21) {
-        console.log('Dealer has BlackJack')
         tempDownCardImg = document.getElementById('down-card-img')
         gameplayDealerCards.removeChild(tempDownCardImg)
         tempDownCardImg = new Image(150, 100)
@@ -279,7 +266,6 @@ function checkForBlackJack() {
         dBlackJack = true
         compareHands()
     } else {
-        console.log('no black jack')
         dBlackJack = false, pBlackJack = false, gamePush = false
     }
 }
@@ -287,7 +273,6 @@ function checkForBlackJack() {
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
-    console.log(dealerHand[0])
     let tempCardImg = new Image(150, 100)
     tempCardImg.setAttribute('id', 'dealer-new-card-img')
     tempCardImg.src = `/img/cardimages/${dealerHand[0]}.svg`
@@ -312,13 +297,9 @@ function updatePlayerCards() {
         let gameCard = document.createElement('div')
         gameCard = new Image(150, 100)
         gameCard.setAttribute("id", "player-shown-img")
-        console.log(card)
         gameCard.src = `/img/cardimages/${playerHand[i]}.svg`
-            // gameCard.style.transform = 'translateX(-' + playerTransDist + 'px)'
-            // playerTransDist += 80
         i++
         gameplayPlayerCards.appendChild(gameCard)
-            // console.log(card)
     })
 }
 
@@ -352,7 +333,6 @@ function determinePlayerHandValue(hand) {
         tempVal -= amountToDeduct
     }
     playerHandValue = tempVal
-    console.log('Player hand value = ' + tempVal)
 }
 
 function determineDealerHandValue(hand) {
@@ -396,7 +376,6 @@ function hitMe() {
     playerTransDist = 160
     if (dBlackJack !== true && gamePush !== true && pBlackJack !== true) {
         playerHand.push(dealRandomCard())
-        console.log('Player Hand = ' + playerHand)
         determinePlayerHandValue(playerHand)
         upDatePlayerHandValue()
         gameCard = new Image(150, 100)
@@ -406,13 +385,11 @@ function hitMe() {
     }
     if (playerHandValue > 21) {
         playerBust = true
-        console.log(playerBust)
         stand()
     }
 }
 
 function stand() {
-    console.log('stand function invoked')
     tempDownCardImg = document.getElementById('down-card-img')
     gameplayDealerCards.removeChild(tempDownCardImg)
     tempDownCardImg = new Image(150, 100)
@@ -422,8 +399,6 @@ function stand() {
 
     while (dealerHandValue <= 16) {
         dealerHand.push(dealRandomCard())
-        console.log('dealer gets card')
-        console.log(dealerHand)
         determineDealerHandValue(dealerHand)
     }
 
@@ -435,32 +410,27 @@ function stand() {
         gameplayDealerCards.appendChild(dealerNewCardImg)
     }
     if (dealerHandValue > 21) {
-        console.log('dealer bust')
         dealerBust = true
     } else {
         dealerBust = false
     }
-    console.log('prepare to compare')
     compareHands()
 }
 
 function compareHands() {
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
-        console.log('Dealer Wins')
         dealerWin = true
         playerResultText = "Player Busts - " + playerHandValue
         dealerResultText = 'Dealer Wins! - ' + dealerHandValue
         displayHandResults()
     }
     if (playerBust === true && dealerBust === true) {
-        console.log('Dealer Wins')
         dealerWin = true
         playerResultText = "Player Busts - " + playerHandValue
         dealerResultText = "Dealer Busts, but still wins!"
         displayHandResults()
     }
     if ((playerBust !== true && dealerBust !== true) && (playerHandValue > dealerHandValue)) {
-        console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
@@ -469,14 +439,12 @@ function compareHands() {
         displayHandResults()
     }
     if ((playerBust !== true && dealerBust !== true) && (playerHandValue < dealerHandValue)) {
-        console.log('dealer wins!')
         dealerWin = true
         playerResultText = "Player Loses - " + playerHandValue
         dealerResultText = 'Dealer Wins! - ' + dealerHandValue
         displayHandResults()
     }
     if ((playerBust !== true && dealerBust !== true) && (playerHandValue === dealerHandValue)) {
-        console.log('game is a push')
         payOutAmount = wagerAmount * 1
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
@@ -485,7 +453,6 @@ function compareHands() {
         displayHandResults()
     }
     if ((playerBust !== true && dealerBust === true) && (playerHandValue <= 21)) {
-        console.log('player wins!')
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
@@ -512,9 +479,6 @@ function compareHands() {
 }
 
 function displayHandResults() {
-    console.log('display results invoked')
-    console.log(playerWin)
-    console.log(dealerWin)
 
     if (dealerWin && dBlackJack) {
         playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
@@ -522,25 +486,21 @@ function displayHandResults() {
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (playerWin && pBlackJack) {
-        console.log('player wins')
         playersCards.style.backgroundColor = 'white'
         dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (dealerWin) {
-        console.log('dealer wins')
         playersCards.style.backgroundColor = 'rgb(248, 66, 66)'
         dealersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (playerWin) {
-        console.log('player wins')
         playersCards.style.backgroundColor = 'white'
         dealersCards.style.backgroundColor = 'rgb(248, 66, 66)'
         dCardHeader.innerText = dealerResultText
         pCardHeader.innerText = playerResultText
     } else if (gamePush) {
-        console.log('push')
         dealersCards.style.backgroundColor = 'white'
         playersCards.style.backgroundColor = 'white'
         dCardHeader.innerText = dealerResultText
@@ -564,10 +524,8 @@ function nextHand() {
         gameplayDealerCards.removeChild(card)
     })
     dealerDownCard = document.getElementById('down-card-img')
-    console.log(dealerDownCard)
 
     if (document.contains(dealerDownCard)) {
-        console.log('huh')
         gameplayDealerCards.removeChild(dealerDownCard)
     }
 
@@ -602,24 +560,15 @@ function exit() {
     playersCards.appendChild(dealButton)
     gameTable.appendChild(handResults)
     gameTable.appendChild(insufficientFunds)
-        // dealerShownCards = document.querySelectorAll('.dealer-card')
-        // playerShownCards = document.querySelectorAll('#player-shown')
+
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
     dealerDownCard = document.getElementById('down-card-img')
-    console.log(dealerDownCard)
-        // dealersCards.removeChild(dealerDownCard)
-    if (document.contains(dealerDownCard)) {
 
+    if (document.contains(dealerDownCard)) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
-    // console.log(playerShownCards)
-    // playerShownCards.forEach(function(card) {
-    //     gameplayPlayerCards.removeChild(card)
-    // })
-    // dealerShownCards.forEach(function(card) {
-    //     gameplayDealerCards.removeChild(card)
-    // })
+
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
@@ -657,22 +606,10 @@ function exitOver() {
     playersCards.appendChild(dealButton)
     gameTable.appendChild(handResults)
     gameTable.appendChild(insufficientFunds)
-        // dealerShownCards = document.querySelectorAll('.dealer-card')
-        // playerShownCards = document.querySelectorAll('#player-shown')
-        // console.log(playerShownCards)
-        // playerShownCards.forEach(function(card) {
-        //     gameplayPlayerCards.removeChild(card)
-        // })
-        // dealerShownCards.forEach(function(card) {
-        //     gameplayDealerCards.removeChild(card)
-        // })
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
     dealerDownCard = document.getElementById('down-card-img')
-    console.log(dealerDownCard)
-        // dealersCards.removeChild(dealerDownCard)
     if (document.contains(dealerDownCard)) {
-        console.log('huh')
         gameplayDealerCards.removeChild(dealerDownCard)
     }
     playerShownCards.forEach(function(card) {
@@ -682,9 +619,7 @@ function exitOver() {
         gameplayDealerCards.removeChild(card)
     })
     mainScreen.removeChild(gameOver)
-        // mainScreen.appendChild(gameTable)
     mainScreen.appendChild(dealerOne)
-        // mainScreen.appendChild(rulesButton)
     mainScreen.appendChild(dealerOne)
     mainScreen.appendChild(startButton)
     mainScreen.appendChild(ruleList)
@@ -697,7 +632,6 @@ function exitOver() {
     if (dealerDownCard === true) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
-    // gameplayDealerCards.removeChild(dealerDownCard)
     mainScreen.style.backgroundColor = 'rgb(86, 133, 139)'
     backGround.style.backgroundColor = 'rgb(177, 154, 24)'
     currentHandCount.innerText = 'N/A'
