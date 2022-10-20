@@ -249,7 +249,7 @@ function checkForBlackJack() {
         gameplayDealerCards.removeChild(tempDownCardImg)
         tempDownCardImg = new Image(150, 100)
         tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
-        tempDownCardImg.src = `../img/cardimages/${dealerHand[1]}.svg`
+        tempDownCardImg.src = `img/cardimages/${dealerHand[1]}.svg`
         gameplayDealerCards.appendChild(tempDownCardImg)
         pBlackJack = true
         compareHands()
@@ -263,7 +263,7 @@ function checkForBlackJack() {
         gameplayDealerCards.removeChild(tempDownCardImg)
         tempDownCardImg = new Image(150, 100)
         tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
-        tempDownCardImg.src = `../img/cardimages/${dealerHand[1]}.svg`
+        tempDownCardImg.src = `img/cardimages/${dealerHand[1]}.svg`
         gameplayDealerCards.appendChild(tempDownCardImg)
         dBlackJack = true
         compareHands()
@@ -281,7 +281,7 @@ function updateDealerCards() {
     dealerShowCard.setAttribute("class", "dealer-card")
     let tempCardImg = new Image(150, 100)
     tempCardImg.setAttribute('id', 'dealer-new-card-img')
-    tempCardImg.src = `../img/cardimages/${dealerHand[0]}.svg`
+    tempCardImg.src = `img/cardimages/${dealerHand[0]}.svg`
     gameplayDealerCards.appendChild(dealerShowCard)
     gameplayDealerCards.appendChild(tempCardImg)
     let dealerDownCard = document.createElement('div')
@@ -289,7 +289,7 @@ function updateDealerCards() {
     dealerDownCard.setAttribute("class", "dealer-card")
     let tempDownCardImg = new Image(150, 100)
     tempDownCardImg.setAttribute('id', 'down-card-img')
-    tempDownCardImg.src = '../img/cardimages/blue.svg'
+    tempDownCardImg.src = 'img/cardimages/blue.svg'
     gameplayDealerCards.appendChild(tempDownCardImg)
 }
 
@@ -300,7 +300,7 @@ function updatePlayerCards() {
         let gameCard = document.createElement('div')
         gameCard = new Image(150, 100)
         gameCard.setAttribute("id", "player-shown-img")
-        gameCard.src = `../img/cardimages/${playerHand[i]}.svg`
+        gameCard.src = `img/cardimages/${playerHand[i]}.svg`
         i++
         gameplayPlayerCards.appendChild(gameCard)
     })
@@ -383,7 +383,7 @@ function hitMe() {
         upDatePlayerHandValue()
         gameCard = new Image(150, 100)
         gameCard.setAttribute("id", "player-shown-img")
-        gameCard.src = `../img/cardimages/${playerHand[playerHand.length - 1]}.svg`
+        gameCard.src = `img/cardimages/${playerHand[playerHand.length - 1]}.svg`
         gameplayPlayerCards.appendChild(gameCard)
     }
     if (playerHandValue > 21) {
@@ -397,7 +397,7 @@ function stand() {
     gameplayDealerCards.removeChild(tempDownCardImg)
     tempDownCardImg = new Image(150, 100)
     tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
-    tempDownCardImg.src = `../img/cardimages/${dealerHand[1]}.svg`
+    tempDownCardImg.src = `img/cardimages/${dealerHand[1]}.svg`
     gameplayDealerCards.appendChild(tempDownCardImg)
 
     while (dealerHandValue <= 16) {
@@ -408,7 +408,7 @@ function stand() {
 
         let dealerNewCardImg = new Image(150, 100)
         dealerNewCardImg.setAttribute('id', 'dealer-new-card-img')
-        dealerNewCardImg.src = `../img/cardimages/${dealerHand[i]}.svg`
+        dealerNewCardImg.src = `img/cardimages/${dealerHand[i]}.svg`
         gameplayDealerCards.appendChild(dealerNewCardImg)
     }
     if (dealerHandValue > 21) {
