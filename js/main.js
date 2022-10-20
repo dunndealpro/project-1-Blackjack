@@ -158,9 +158,9 @@ function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
-        // console.log(playerName)
+    console.log(playerName)
         // playerName = playerName[1].innerText
-        // playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
+        //     // playerName = playerName.charAt(0).toUpperCase() + playerName.slice(1)
         // console.log(playerName)
 }
 
@@ -181,8 +181,10 @@ function goToTheTable() {
     mainScreen.style.backgroundColor = 'rgb(191, 48, 163)'
     backGround.style.backgroundColor = 'rgb(191, 48, 163)'
     playerPhoto.src = playerName[0].currentSrc
+    playerInfo.innerText = playerName[1].innerText
     playerInfo.appendChild(playerPhoto)
-        // imageCardDeck.classList.add('card', 'small-container-deck')
+
+    // imageCardDeck.classList.add('card', 'small-container-deck')
     imageCardDeck.appendChild(cardBackImg)
 
     // cardDeckInPlay.appendChild(cardBackImg)
