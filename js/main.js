@@ -9,10 +9,17 @@ const playerThreeImage = new Image(200, 150)
 playerThreeImage.src = 'img/burton.png'
 const playerTwoName = 'Milo'
 const playerTwoImage = new Image(200, 150)
-playerTwoImage.src = 'img/milo.png'
-const playerFourName = 'Lucy'
+playerTwoImage.src = 'img/milo2.png'
+const playerFourName = 'Maddie'
 const playerFourImage = new Image(200, 150)
-playerFourImage.src = 'img/lucy.png'
+playerFourImage.src = 'img/maddie.png'
+const playerFiveName = 'Mookie'
+const playerFiveImage = new Image(200, 140)
+playerFiveImage.src = 'img/mookie.png'
+const playerSixName = 'Chunk'
+const playerSixImage = new Image(200, 150)
+playerSixImage.src = 'img/chunk.png'
+
 
 /*----- state variables -----*/
 let dealerHand = [],
@@ -62,6 +69,8 @@ const playerOne = document.querySelector('#player-one')
 const playerTwo = document.querySelector('#player-two')
 const playerThree = document.querySelector('#player-three')
 const playerFour = document.querySelector('#player-four')
+const playerFive = document.querySelector('#player-five')
+const playerSix = document.querySelector('#player-six')
 const handResults = document.getElementById('hand-results')
 const gameOver = document.getElementById('game-over')
 
@@ -152,6 +161,11 @@ function addPlayerInfo() {
     playerThree.appendChild(playerThreeImage)
     playerFour.innerText = playerFourName
     playerFour.appendChild(playerFourImage)
+    playerFive.innerText = playerFiveName
+    playerFive.appendChild(playerFiveImage)
+    playerSix.innerText = playerSixName
+    playerSix.appendChild(playerSixImage)
+
 }
 
 function getPlayerBalance(evt) {
@@ -169,7 +183,11 @@ function gameStart() {
     startingBalance = document.querySelector('input')
     currentBalanceAmt = startingBalance.value
     console.log(startingBalance)
-    goToTheTable()
+    if (currentBalanceAmt > 0) {
+        goToTheTable()
+    }
+
+    // goToTheTable()
 
 }
 
@@ -385,7 +403,7 @@ function determinePlayerHandValue(hand) {
     if (numberOfAces.length >= 2) {
         amountToDeduct = (numberOfAces.length - 1) * 10
     }
-    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
+    if (tempVal > 21 && (hand.includes('Ad') || hand.includes('Ah') || hand.includes('Ac') || hand.includes('As'))) {
         tempVal -= amountToDeduct
     }
     playerHandValue = tempVal
@@ -426,7 +444,7 @@ function determineDealerHandValue(hand) {
     if (numberOfAces.length >= 2) {
         amountToDeduct = (numberOfAces.length - 1) * 10
     }
-    if (tempVal > 21 && (hand.includes('Adiamonds') || hand.includes('Ahearts') || hand.includes('Aclubs') || hand.includes('Aspades'))) {
+    if (tempVal > 21 && (hand.includes('Ad') || hand.includes('Ah') || hand.includes('Ac') || hand.includes('As'))) {
         tempVal -= amountToDeduct
     }
     dealerHandValue = tempVal
@@ -518,15 +536,15 @@ function compareHands() {
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         console.log('Dealer Wins')
         dealerWin = true
-        playerResultText = "Player Busts"
-        dealerResultText = "Dealer Wins!"
+        playerResultText = "Player Busts - " + playerHandValue
+        dealerResultText = 'Dealer Wins! - ' + dealerHandValue
         displayHandResults()
             // nextHand()
     }
     if (playerBust === true && dealerBust === true) {
         console.log('Dealer Wins')
         dealerWin = true
-        playerResultText = "Player Busts"
+        playerResultText = "Player Busts - " + playerHandValue
         dealerResultText = "Dealer Busts, but still wins!"
         displayHandResults()
             // nextHand()
@@ -536,8 +554,8 @@ function compareHands() {
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
-        playerResultText = "Player Wins!"
-        dealerResultText = "Dealer Loses"
+        playerResultText = 'Player Wins! - ' + playerHandValue
+        dealerResultText = "Dealer Loses - " + dealerHandValue
         displayHandResults()
             // nextHand()
     }
@@ -545,8 +563,8 @@ function compareHands() {
 
         console.log('dealer wins!')
         dealerWin = true
-        playerResultText = "Player Loses"
-        dealerResultText = "Dealer Wins!"
+        playerResultText = "Player Loses - " + playerHandValue
+        dealerResultText = 'Dealer Wins! - ' + dealerHandValue
         displayHandResults()
             // nextHand()
     }
@@ -555,8 +573,8 @@ function compareHands() {
         payOutAmount = wagerAmount * 1
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
-        playerResultText = "Push!"
-        dealerResultText = "Push!"
+        playerResultText = "Push! - " + playerHandValue
+        dealerResultText = "Push! - " + dealerHandValue
         displayHandResults()
             // nextHand()
     }
@@ -565,8 +583,8 @@ function compareHands() {
         payOutAmount = wagerAmount * 2
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         playerWin = true
-        playerResultText = "Player Wins!"
-        dealerResultText = "Dealer Busts"
+        playerResultText = 'Player Wins! - ' + playerHandValue
+        dealerResultText = "Dealer Busts - " + dealerHandValue
         displayHandResults()
             // nextHand()
     }

@@ -125,7 +125,7 @@ li {
 #choose {
     /* cursor: pointer; */
     margin: 15px;
-    grid-column: span 2;
+    grid-column: span 3;
     display: flex;
     justify-content: center;
     font-size: 30px;
