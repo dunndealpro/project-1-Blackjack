@@ -278,8 +278,15 @@ function checkForBlackJack() {
         // payOutAmount = 2.5 * wagerAmount
         // console.log(payOutAmount)
         // currentBalanceAmt = currentBalanceAmt + payOutAmount
-        dealerDownCard = document.getElementById('down-card')
-        dealerDownCard.textContent = dealerHand[1]
+        // dealerDownCard = document.getElementById('down-card')
+        // dealerDownCard.textContent = dealerHand[1]
+        tempDownCardImg = document.getElementById('down-card-img')
+        gameplayDealerCards.removeChild(tempDownCardImg)
+        tempDownCardImg = new Image(150, 100)
+        tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
+        tempDownCardImg.src = `/img/cardimages/${dealerHand[1]}.svg`
+            // tempDownCardImg.style.transform = 'translateX(-50px)'
+        gameplayDealerCards.appendChild(tempDownCardImg)
         pBlackJack = true
         compareHands()
 
@@ -291,6 +298,13 @@ function checkForBlackJack() {
         compareHands()
     } else if (playerHandValue !== 21 && dealerHandValue === 21) {
         console.log('Dealer has BlackJack')
+        tempDownCardImg = document.getElementById('down-card-img')
+        gameplayDealerCards.removeChild(tempDownCardImg)
+        tempDownCardImg = new Image(150, 100)
+        tempDownCardImg.setAttribute('id', 'dealer-new-card-img')
+        tempDownCardImg.src = `/img/cardimages/${dealerHand[1]}.svg`
+            // tempDownCardImg.style.transform = 'translateX(-50px)'
+        gameplayDealerCards.appendChild(tempDownCardImg)
         dBlackJack = true
         compareHands()
     } else {
@@ -629,9 +643,10 @@ function nextHand() {
     })
 
     dealerDownCard = document.getElementById('down-card-img')
-
-    if (dealerDownCard === true) {
-
+    console.log(dealerDownCard)
+        // dealersCards.removeChild(dealerDownCard)
+    if (document.contains(dealerDownCard)) {
+        console.log('huh')
         gameplayDealerCards.removeChild(dealerDownCard)
     }
     playersCards.appendChild(enterWager)
@@ -755,7 +770,7 @@ function exitOver() {
     console.log(dealerDownCard)
         // dealersCards.removeChild(dealerDownCard)
     if (document.contains(dealerDownCard)) {
-
+        console.log('huh')
         gameplayDealerCards.removeChild(dealerDownCard)
     }
     playerShownCards.forEach(function(card) {

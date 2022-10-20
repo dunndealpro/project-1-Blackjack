@@ -335,6 +335,7 @@ input {
 #player-shown-img {
     /* background-color: white; */
     margin-left: -80px;
+    align-content: center;
 }
 
 #dealer-new-card-img {
@@ -380,6 +381,14 @@ input {
     width: 350px;
 }
 
+
+/* .gameplay-player-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+} */
+
 .gameplay-dealer-cards img {
     /* display: flex; */
     /* place-items: center; */
@@ -407,13 +416,6 @@ input {
 /* #dealer-new-card-img {
     transform: translateX(-100px);
 } */
-
-*/ .gameplay-player-cards {
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* justify-content: center; */
-    gap: 5px;
-}
 
 #ok-button-1 {
     /* grid-column: span 1; */
