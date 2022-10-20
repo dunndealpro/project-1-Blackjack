@@ -690,8 +690,9 @@ function exit() {
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
     dealerDownCard = document.getElementById('down-card-img')
-
-    if (dealerDownCard === true) {
+    console.log(dealerDownCard)
+        // dealersCards.removeChild(dealerDownCard)
+    if (document.contains(dealerDownCard)) {
 
         gameplayDealerCards.removeChild(dealerDownCard)
     }
@@ -750,7 +751,13 @@ function exitOver() {
         // })
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
+    dealerDownCard = document.getElementById('down-card-img')
+    console.log(dealerDownCard)
+        // dealersCards.removeChild(dealerDownCard)
+    if (document.contains(dealerDownCard)) {
 
+        gameplayDealerCards.removeChild(dealerDownCard)
+    }
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
