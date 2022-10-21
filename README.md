@@ -21,7 +21,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
     - If the dealer does not have **Blackjack** the player automatically wins and player wins one and half times their betted amount
     - If the dealer also has **Blackjack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
     - If not a black jack, dealer's face down card is left face down until it is the dealer's turn
-    - dealer plays last
+    - Dealer plays last
 
 - Player decides to 'hit' or 'stand' depending on the originally dealt cards 
     - Player may 'hit' for an additional card to get closer to 21, until deciding to 'stand'
