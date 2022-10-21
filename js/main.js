@@ -280,7 +280,6 @@ function checkForBlackJack() {
         pBlackJack = true
         compareHands()
 
-
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
@@ -297,7 +296,6 @@ function checkForBlackJack() {
     } else {
         dBlackJack = false, pBlackJack = false, gamePush = false
     }
-
 }
 
 // updates dealer cards with card images
