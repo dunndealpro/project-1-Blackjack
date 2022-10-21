@@ -227,11 +227,11 @@ function dealRandomCard() {
 function dealCards() {
     wagerAmount = document.querySelector('input')
     wagerAmount = wagerAmount.value
+    wagerAmount = parseInt(wagerAmount, 10)
     currentWager.innerText = wagerAmount
     playersCards.removeChild(enterWager)
     playersCards.removeChild(inputWager)
     playersCards.removeChild(dealButton)
-    wagerAmount = parseInt(wagerAmount)
     currentBalanceAmt = parseInt(currentBalanceAmt)
     if ((wagerAmount <= currentBalanceAmt) && (wagerAmount > 0)) {
         dealFirstTwoCards()
@@ -249,7 +249,7 @@ function insufficientBack() {
     playersCards.appendChild(enterWager)
     playersCards.appendChild(inputWager)
     playersCards.appendChild(dealButton)
-    inputWager.value = null
+    inputWager.value = ''
 }
 
 // deals random cards to player and dealer and assigns to their hands as an array
@@ -671,8 +671,8 @@ function exitOver() {
     backGround.style.backgroundColor = colorCardTableGreen
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
-    inputWager.value = null
-    startingBalance.value = null
+    inputWager.value = ''
+    startingBalance.value = ''
 
     clearGameInfo()
 
