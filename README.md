@@ -83,8 +83,8 @@ https://dunndealpro.github.io/project-1-Blackjack/
 
 - Click "Start" to begin the game or click "Rules" to get the basic rules.
 - Choose Player by clicking on picture.
-- Enter starting balance(numerical value greater than zero) and either hit 'enter' key or click "Let's Play."
-- Enter your wager amount and either hit 'enter' key or click "Deal" to start your hand.  Wager amount will cary over to the next hand, but will have the option to increase or decrease.
+- Enter starting balance(numerical value greater than zero) and click "Let's Play."
+- Enter your wager amount and click "Deal" to start your hand.  Wager amount will cary over to the next hand, but will have the option to increase or decrease.
 - If Blackjack occurs for either dealer or player, the hand will end.  Click "Next Hand" to continue.
 - Click "Hit Me" to receive next card or click "Stand" to reveal dealers cards.(Dealer will automatically receive cards)
     - If player "Busts", hand will automatically end.  Click "Next Hand" to continue.
