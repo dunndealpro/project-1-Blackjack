@@ -35,7 +35,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
     - if total is 16 or less, dealer must hit
     - if the dealer has an ace, and counting it as 11 would bring the total to 17 or more (but not over 21), the dealer must count the ace as 11 and stand.
 
-## The following rules will be implement for future development
+## The following rules will be implemented for future development
 
 - if player's first two are the same amount, they may **split** and split their cards into two separate hands
     - if choose to split, original wager must be placed on first card and equal amount is place on second card
@@ -79,6 +79,8 @@ https://dunndealpro.github.io/project-1-Blackjack/
 
 ## Getting Started
 
+- For the best gameplay experience, it is recommended to be played on a maximized browser window.  
+
 - Click "Start" to begin the game or click "Rules" to get the basic rules.
 - Choose Player by clicking on picture.
 - Enter starting balance(numerical value greater than zero) and either hit 'enter' key or click "Let's Play."
@@ -92,6 +94,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
 
 ## Next Steps / Future Enhancements
 
+- optimized for mobile devices
 - Create Split Hand functions
 - Create insurance Option
 - Create Double Down functions

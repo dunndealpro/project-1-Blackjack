@@ -117,6 +117,7 @@ let numberOfDecks = 4
 
 /*----- functions -----*/
 
+//show rules view
 function showRules() {
     mainScreen.removeChild(dealerOne)
     mainScreen.removeChild(rulesButton)
@@ -124,6 +125,7 @@ function showRules() {
     mainScreen.appendChild(ruleList)
 }
 
+//to go back to start page
 function handleBack() {
     mainScreen.appendChild(dealerOne)
     mainScreen.appendChild(startButton)
@@ -131,6 +133,7 @@ function handleBack() {
     mainScreen.removeChild(ruleList)
 }
 
+//go to choose player view
 function start() {
     mainScreen.removeChild(dealerOne)
     mainScreen.removeChild(rulesButton)
@@ -139,6 +142,7 @@ function start() {
     addPlayerInfo()
 }
 
+// add players to selection to view
 function addPlayerInfo() {
     playerOne.innerText = playerOneName
     playerOne.appendChild(playerOneImage)
@@ -154,6 +158,7 @@ function addPlayerInfo() {
     playerSix.appendChild(playerSixImage)
 }
 
+// go player starting balance view
 function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
@@ -166,6 +171,7 @@ function getPlayerBalance(evt) {
     })
 }
 
+// stores starting balance and goes to main game view
 function gameStart() {
     startingBalance = document.querySelector('input')
     currentBalanceAmt = startingBalance.value
@@ -174,6 +180,7 @@ function gameStart() {
     }
 }
 
+// enables the game table
 function goToTheTable() {
     mainScreen.removeChild(balanceAmount)
     gameTable.removeChild(handResults)
@@ -195,6 +202,7 @@ function goToTheTable() {
     })
 }
 
+// generate card deck depending on amount of decks being used
 function generateCards() {
     for (let k = 0; k < numberOfDecks; k++) {
         for (let i = 0; i < values.length; i++) {
@@ -206,6 +214,7 @@ function generateCards() {
     }
 }
 
+//deals random card and removes it from the deck
 function dealRandomCard() {
     let card = Math.floor(Math.random() * newDeck.length)
     let newCard = newDeck[card]
@@ -213,6 +222,7 @@ function dealRandomCard() {
     return newCard
 }
 
+// gets wager amount and starts hand
 function dealCards() {
     wagerAmount = document.querySelector('input')
     wagerAmount = wagerAmount.value
@@ -232,6 +242,7 @@ function dealCards() {
     exitButton.addEventListener('click', exit)
 }
 
+//checks that wage amount is > 0 and <= balance amount
 function insufficientBack() {
     currentWager.innerText = 0
     insufficientFunds.replaceWith(playersCards)
@@ -241,6 +252,7 @@ function insufficientBack() {
     inputWager.value = null
 }
 
+// deals random cards to player and dealer and assigns to their hands as an array
 function dealFirstTwoCards() {
     playerHand.push(dealRandomCard())
     dealerHand.push(dealRandomCard())
@@ -256,6 +268,7 @@ function dealFirstTwoCards() {
     checkForBlackJack()
 }
 
+// checks for winning blackjack
 function checkForBlackJack() {
     if (playerHandValue === 21 && dealerHandValue !== 21) {
         tempDownCardImg = document.getElementById('down-card-img')
@@ -285,6 +298,7 @@ function checkForBlackJack() {
     }
 }
 
+// updates dealer cards with card images
 function updateDealerCards() {
     let dealerShowCard = document.createElement('div')
     dealerShowCard.setAttribute("class", "dealer-card")
@@ -302,6 +316,7 @@ function updateDealerCards() {
     gameplayDealerCards.appendChild(tempDownCardImg)
 }
 
+//updates player cards with card images
 function updatePlayerCards() {
     playerTransDist = 0
     i = 0
@@ -315,6 +330,7 @@ function updatePlayerCards() {
     })
 }
 
+//determine player hand value from player's array of cards
 function determinePlayerHandValue(hand) {
     tempVal = 0
     hand.forEach(function(value) {
@@ -347,6 +363,7 @@ function determinePlayerHandValue(hand) {
     playerHandValue = tempVal
 }
 
+//determine dealer hand value from dealer's array of cards
 function determineDealerHandValue(hand) {
     tempVal = 0
     hand.forEach(function(value) {
@@ -379,12 +396,13 @@ function determineDealerHandValue(hand) {
     dealerHandValue = tempVal
 }
 
+//updates player hand value display
 function upDatePlayerHandValue() {
     currentHandCount.innerText = playerHandValue
 }
 
+//deals player hit card
 function hitMe() {
-    playerTransDist = 160
     if (dBlackJack !== true && gamePush !== true && pBlackJack !== true) {
         playerHand.push(dealRandomCard())
         determinePlayerHandValue(playerHand)
@@ -400,6 +418,7 @@ function hitMe() {
     }
 }
 
+// deals dealer additional cards if dealer hand is <=16, determine if dealer busts
 function stand() {
     tempDownCardImg = document.getElementById('down-card-img')
     gameplayDealerCards.removeChild(tempDownCardImg)
@@ -430,6 +449,7 @@ function stand() {
     compareHands()
 }
 
+//compares dealer and play hand values and assign win results to be displayed
 function compareHands() {
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         dealerWin = true
@@ -491,6 +511,7 @@ function compareHands() {
     currentBalance.innerText = currentBalanceAmt
 }
 
+//displays win results
 function displayHandResults() {
 
     if (dealerWin && dBlackJack) {
@@ -521,6 +542,7 @@ function displayHandResults() {
     }
 }
 
+//clears game table and starts next hand
 function nextHand() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
@@ -554,6 +576,7 @@ function nextHand() {
     }
 }
 
+//clears player and dealer hand values & resets win conditions
 function clearGameInfo() {
     playerHand = []
     dealerHand = []
@@ -566,6 +589,7 @@ function clearGameInfo() {
     dealerWin = null
 }
 
+//game reset if exit button is clicked
 function exit() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
@@ -605,6 +629,7 @@ function exit() {
     clearGameInfo()
 }
 
+//game reset if player loses all their money
 function exitOver() {
     dCardHeader.innerText = 'Dealer Cards'
     pCardHeader.innerText = 'Player Cards'
@@ -682,7 +707,6 @@ function init() {
     mainScreen.removeChild(balanceAmount)
     mainScreen.removeChild(gameTable)
     mainScreen.removeChild(gameOver)
-
 }
 
 init()
