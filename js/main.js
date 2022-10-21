@@ -200,6 +200,7 @@ function goToTheTable() {
             dealCards()
         }
     })
+    exitButton.addEventListener('click', exit)
 }
 
 // generate card deck depending on amount of decks being used
@@ -239,7 +240,6 @@ function dealCards() {
     }
     hitButton.addEventListener('click', hitMe)
     standButton.addEventListener('click', stand)
-    exitButton.addEventListener('click', exit)
 }
 
 //checks that wage amount is > 0 and <= balance amount
@@ -280,6 +280,7 @@ function checkForBlackJack() {
         pBlackJack = true
         compareHands()
 
+
     } else if (playerHandValue === 21 && dealerHandValue === 21) {
         currentBalanceAmt = currentBalanceAmt + payOutAmount
         gamePush = true
@@ -296,6 +297,7 @@ function checkForBlackJack() {
     } else {
         dBlackJack = false, pBlackJack = false, gamePush = false
     }
+
 }
 
 // updates dealer cards with card images
@@ -451,6 +453,7 @@ function stand() {
 
 //compares dealer and play hand values and assign win results to be displayed
 function compareHands() {
+    nextHandButton.addEventListener('click', nextHand)
     if ((playerBust === true && dealerBust !== true) && (dealerHandValue <= 21)) {
         dealerWin = true
         playerResultText = "Player Busts - " + playerHandValue
@@ -569,6 +572,7 @@ function nextHand() {
     currentWager.innerText = 0
 
     clearGameInfo()
+    nextHandButton.removeEventListener('click', nextHand)
 
     if (currentBalanceAmt <= 0) {
         mainScreen.removeChild(gameTable)
@@ -576,7 +580,6 @@ function nextHand() {
     }
 }
 
-//clears player and dealer hand values & resets win conditions
 function clearGameInfo() {
     playerHand = []
     dealerHand = []
@@ -600,11 +603,9 @@ function exit() {
     playersCards.appendChild(dealButton)
     gameTable.appendChild(handResults)
     gameTable.appendChild(insufficientFunds)
-
     dealerShownCards = document.querySelectorAll('#dealer-new-card-img')
     playerShownCards = document.querySelectorAll('#player-shown-img')
     dealerDownCard = document.getElementById('down-card-img')
-
     if (document.contains(dealerDownCard)) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
@@ -646,6 +647,7 @@ function exitOver() {
     if (document.contains(dealerDownCard)) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
+
     playerShownCards.forEach(function(card) {
         gameplayPlayerCards.removeChild(card)
     })
@@ -666,6 +668,7 @@ function exitOver() {
     if (dealerDownCard === true) {
         gameplayDealerCards.removeChild(dealerDownCard)
     }
+
     mainScreen.style.backgroundColor = colorBackgroundBlue
     backGround.style.backgroundColor = colorCardTableGreen
     currentHandCount.innerText = 'N/A'
@@ -674,15 +677,7 @@ function exitOver() {
     startingBalance.value = null
 
     clearGameInfo()
-        // playerHand = []
-        // dealerHand = []
-        // playerBust = false
-        // dealerBust = false
-        // dPlackJack = null
-        // dPlackJack = null
-        // gamePush = null
-        // playerWin = null
-        // dealerWin = null
+
     init()
 }
 
@@ -699,7 +694,6 @@ okButtonTwo.addEventListener('click', exitOver)
 playerSelected.forEach(function(player) {
     player.addEventListener('click', getPlayerBalance)
 })
-
 
 function init() {
     mainScreen.removeChild(ruleList)

@@ -54,7 +54,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
     - If the dealer does get **Blackjack** and the player does not have **Blackjack** or **insurance**, the hand is over the player's wager is lost
         - If player has **Blackjack** it is a tie or a draw.  original wager is given back to the player
 
-*rules have been summarized from https://bicyclecards.com/how-to-play/blackjack/
+*Rules have been summarized from https://bicyclecards.com/how-to-play/blackjack/
 
 ## Screen Shots
 
@@ -85,7 +85,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
 - Choose Player by clicking on picture.
 - Enter starting balance(numerical value greater than zero) and either hit 'enter' key or click "Let's Play."
 - Enter your wager amount and either hit 'enter' key or click "Deal" to start your hand.  Wager amount will cary over to the next hand, but will have the option to increase or decrease.
-- If BlackJack occurs for either dealer or player, the hand will end.  Click "Next Hand" to continue.
+- If Blackjack occurs for either dealer or player, the hand will end.  Click "Next Hand" to continue.
 - Click "Hit Me" to receive next card or click "Stand" to reveal dealers cards.(Dealer will automatically receive cards)
     - If player "Busts", hand will automatically end.  Click "Next Hand" to continue.
 - If player's balance reaches '$0,' the game will automatically end.  
