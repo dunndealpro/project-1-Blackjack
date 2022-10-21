@@ -19,7 +19,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
 - **Blackjack** occurs when a player's first two cards are an ace and card worth 10, giving 21.  
     - If the dealers face up card is a 10 card or an ace, dealer checks face down card for a **Blackjack**
     - If the dealer does not have **Blackjack** the player automatically wins and player wins one and half times their betted amount
-    - If the dealer also has **Blackjack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
+    - If the dealer also has **Blackjack**, it is revealed and this is a tie or a draw, and the player receives their bet back.
     - If not a black jack, dealer's face down card is left face down until it is the dealer's turn
     - Dealer plays last
 
