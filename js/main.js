@@ -163,12 +163,7 @@ function getPlayerBalance(evt) {
     mainScreen.removeChild(choosePlayer)
     mainScreen.appendChild(balanceAmount)
     playerName = evt.composedPath()
-    inputBalance = document.getElementById('start-balance')
-    inputBalance.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            gameStart()
-        }
-    })
+
 }
 
 // stores starting balance and goes to main game view
@@ -194,12 +189,7 @@ function goToTheTable() {
     imageCardDeck.appendChild(cardBackImg)
     currentBalance.innerText = currentBalanceAmt
     generateCards()
-    inputWagerBox = document.getElementById('input-wager')
-    inputWagerBox.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            dealCards()
-        }
-    })
+
     exitButton.addEventListener('click', exit)
 }
 
@@ -225,8 +215,8 @@ function dealRandomCard() {
 
 // gets wager amount and starts hand
 function dealCards() {
-    wagerAmount = document.querySelector('input')
-    wagerAmount = wagerAmount.value
+    wagerAmountTemp = document.querySelector('input')
+    wagerAmount = wagerAmountTemp.value
     wagerAmount = parseInt(wagerAmount, 10)
     currentWager.innerText = wagerAmount
     playersCards.removeChild(enterWager)
@@ -622,8 +612,8 @@ function exit() {
     backGround.style.backgroundColor = colorCardTableGreen
     currentHandCount.innerText = 'N/A'
     currentWager.innerText = 0
-    inputWager.value = null
-    startingBalance.value = null
+    inputWager.value = ''
+    startingBalance.value = ''
 
     clearGameInfo()
 }
