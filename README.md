@@ -1,4 +1,4 @@
-# Black Jack
+# Blackjack
 
 https://dunndealpro.github.io/project-1-Blackjack/
 
@@ -100,3 +100,12 @@ https://dunndealpro.github.io/project-1-Blackjack/
 - Create Double Down functions
 - Add setTimeout functions to revealing dealers card to add anticipation
 - Add sound effects and animations to cards being dealt
+
+# Special Thanks to the following dogs for allowing use of their images and likeness
+
+- Yogi Bear (RIP)
+- Chunk (RIP)
+- Maddie (RIP)
+- Burton
+- Mookie aka Bubble
+- Milo aka Squeek
