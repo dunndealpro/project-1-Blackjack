@@ -3,12 +3,12 @@
 https://dunndealpro.github.io/project-1-Blackjack/
 
 ## Object of the Game
-- player is trying to beat the dealer by getting a count as close to 21 without going over 21
+- Player is trying to beat the dealer by getting a count as close to 21 without going over 21
 
 ## Card Values 
 - Aces are worth either 1 or 11, player choses its value
 - Facecards(Kings, Queens, Jacks) are worth 10.
-- all other cards are worth their number(ie 3 of spades = 3)
+- All other cards are worth their number(ie 3 of spades = 3)
 
 ## Rules
 - Betting happens before the deal
@@ -17,11 +17,11 @@ https://dunndealpro.github.io/project-1-Blackjack/
     - Players cards are dealt face up while the dealers second card is dealt faced down
 
 - **Blackjack** occurs when a player's first two cards are an ace and card worth 10, giving 21.  
-    -If the dealers face up card is a 10 card or an ace, dealer checks face down card for a **Blackjack**
-    -If the dealer does not have **Blackjack** the player automatically wins and player wins one and half times their betted amount
-    -If the dealer also has **Blackjack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
-    -If not a black jack, dealer's face down card is left face down until it is the dealer's turn
-    -dealer plays last
+    - If the dealers face up card is a 10 card or an ace, dealer checks face down card for a **Blackjack**
+    - If the dealer does not have **Blackjack** the player automatically wins and player wins one and half times their betted amount
+    - If the dealer also has **Blackjack**, it is revealed and this is a tie or a draw, and the player receives his bet back.
+    - If not a black jack, dealer's face down card is left face down until it is the dealer's turn
+    - dealer plays last
 
 - Player decides to 'hit' or 'stand' depending on the originally dealt cards 
     - Player may 'hit' for an additional card to get closer to 21, until deciding to 'stand'
@@ -58,7 +58,7 @@ https://dunndealpro.github.io/project-1-Blackjack/
 
 ## Screen Shots
 
-![Opening View](img/screenshots/opening-view.png)
+![Opening View](img/screenshots/opening-view.PNG)
 ![Rules](img/screenshots/rules-view.PNG)
 ![Choose Player](img/screenshots/choose-player-view.PNG)
 ![Enter Balance](img/screenshots/enter-balance.PNG)
